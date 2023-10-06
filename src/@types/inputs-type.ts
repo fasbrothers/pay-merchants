@@ -1,19 +1,3 @@
-export interface IResponse {
-	password: boolean;
-	otp: boolean;
-	token: string;
-	customer: Customer;
-	success: boolean;
-}
-
-export interface Customer {
-	id: string;
-	name: string;
-	phone: string;
-	image_url: string | null | undefined;
-	reg_date: string;
-}
-
 export interface ErrorResponse {
 	message: string;
 	status: number;
@@ -35,24 +19,30 @@ export interface AuthProps {
 	isLoading: boolean;
 }
 
-export interface ICardResponse {
+export interface Categories {
+	count: number;
+	categories: Category[];
+}
+
+export interface Category {
+	id: number;
+	code: string;
+	name: string;
+}
+
+export interface ServiceResponse {
 	success: boolean;
-	card: Card;
+	service: Service;
 }
 
-export interface Card {
+export interface Service {
 	id: string;
-	customer_id: string;
+	merchant_id: string;
+	category_id: number;
 	name: string;
-	pan: string;
-	expiry_month: string;
-	expiry_year: string;
-	balance: string;
-}
-
-export interface IAddCard {
-	cvc: string;
-	expiry: string;
-	name: string;
-	pan: string;
+	price: number;
+	image_url: string;
+	is_active: boolean;
+	category_code: string;
+	category_name: string;
 }

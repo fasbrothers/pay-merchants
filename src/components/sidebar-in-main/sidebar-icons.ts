@@ -13,9 +13,9 @@ export const icons = [
 	},
 	{
 		id: 2,
-		title: 'Cards',
+		title: 'Services',
 		icon: CreditCardIcon,
-		url: '/cabinet/cards',
+		url: '/cabinet/services',
 	},
 	{
 		id: 3,

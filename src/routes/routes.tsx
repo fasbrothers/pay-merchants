@@ -8,6 +8,8 @@ const NotFound = React.lazy(() => import('../pages/not-found'));
 const MainLayout = React.lazy(() => import('../layouts/main-layout'));
 const RootLayout = React.lazy(() => import('../layouts/root-layout'));
 const SignInUpLayout = React.lazy(() => import('../layouts/sign-in-up-layout'));
+const Services = React.lazy(() => import('../pages/services'));
+const AddService = React.lazy(() => import('../pages/add-service'));
 
 const routes: RouteObject[] = [
 	{
@@ -47,6 +49,19 @@ const routes: RouteObject[] = [
 						children: [
 							{ path: 'dashboard', element: <Main /> },
 							{ path: '*', element: <NotFound /> },
+							{
+								path: 'services',
+								children: [
+									{
+										index: true,
+										element: <Services />,
+									},
+									{
+										path: 'add-service',
+										element: <AddService />,
+									},
+								],
+							},
 						],
 					},
 				],
