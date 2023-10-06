@@ -29,7 +29,7 @@ export const HeaderMain = ({ setShowNavbar, showNavbar, title }: Props) => {
 
 	const { isLoading, data: profile } = useDataFetching<any>(
 		'profile',
-		'customer/profile'
+		'merchant/profile'
 	);
 
 	const items: MenuProps['items'] = [

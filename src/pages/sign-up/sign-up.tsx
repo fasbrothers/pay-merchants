@@ -20,12 +20,11 @@ export default function SignUp() {
 	const dispatch = useAppDispatch();
 
 	const handleSubmit = async (values: InputValues) => {
-		const { name, phone, password, trust } = values;
-		const { data } = await httpClient.post<IResponse>('/customer/register', {
+		const { name, email, password } = values;
+		const { data } = await httpClient.post<IResponse>('/merchant/register', {
 			name,
-			phone: '998' + phone,
+			email,
 			password,
-			trust,
 		});
 
 		navigate('/cabinet');

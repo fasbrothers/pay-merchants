@@ -8,7 +8,6 @@ const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 	const [form] = Form.useForm();
 
 	const handleSubmit = (values: InputValues) => {
-		values.phone = values.phone && values.phone.replace(/\s/g, '');
 		mutate(values);
 	};
 	return (
@@ -29,6 +28,7 @@ const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 						message: 'Please input your name!',
 						whitespace: true,
 					},
+					{ min: 2, message: 'Name must be minimum 2 characters.' },
 				]}
 			>
 				<Input
@@ -63,7 +63,7 @@ const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 						required: true,
 						message: 'Please input your password!',
 					},
-					{ min: 6, message: 'Password must be minimum 6 characters.' },
+					{ min: 7, message: 'Password must be minimum 7 characters.' },
 					{
 						pattern: new RegExp('([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*'),
 						message: 'Password must be at least one number and letter.',

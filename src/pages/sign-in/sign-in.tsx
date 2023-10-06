@@ -20,13 +20,11 @@ export default function SignIn() {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (values: InputValues) => {
-		const { password, otp, phone, trust } = values;
+		const { password, email } = values;
 
-		const { data } = await httpClient.post<IResponse>('/customer/login', {
-			phone: '998' + phone,
+		const { data } = await httpClient.post<IResponse>('/merchant/login', {
 			password,
-			otp,
-			trust,
+			email,
 		});
 
 		navigate('/cabinet');

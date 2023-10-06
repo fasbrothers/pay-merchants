@@ -22,11 +22,11 @@ export interface ErrorResponse {
 
 export interface InputValues {
 	phone?: string;
-	otp?: string;
 	password?: string;
 	trust?: boolean;
 	name?: string;
 	image_url?: string;
+	email?: string;
 	deletePhoto?: boolean;
 }
 
