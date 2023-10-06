@@ -4,6 +4,16 @@ export interface ErrorResponse {
 	types: string;
 }
 
+export interface IResponse {
+	token: string;
+	merchant: {
+		id: string;
+		name: string;
+		email: string;
+		reg_date: string;
+	};
+}
+
 export interface InputValues {
 	phone?: string;
 	password?: string;
