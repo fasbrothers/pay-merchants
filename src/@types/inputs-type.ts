@@ -56,3 +56,20 @@ export interface Service {
 	category_code: string;
 	category_name: string;
 }
+
+export interface ResponseServices {
+	count: number;
+	services: ResponseService[];
+}
+
+export interface ResponseService {
+	id: string;
+	merchant_id: string;
+	category_id: number;
+	name: string;
+	price: number;
+	image_url?: string;
+	is_active: boolean;
+	category_code: string;
+	category_name: string;
+}
