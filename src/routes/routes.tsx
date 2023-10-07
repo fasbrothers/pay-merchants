@@ -10,6 +10,7 @@ const RootLayout = React.lazy(() => import('../layouts/root-layout'));
 const SignInUpLayout = React.lazy(() => import('../layouts/sign-in-up-layout'));
 const Services = React.lazy(() => import('../pages/services'));
 const AddService = React.lazy(() => import('../pages/add-service'));
+const SingleService = React.lazy(() => import('../pages/single-service'));
 
 const routes: RouteObject[] = [
 	{
@@ -58,6 +59,14 @@ const routes: RouteObject[] = [
 									},
 									{
 										path: 'add-service',
+										element: <AddService />,
+									},
+									{
+										path: ':id',
+										element: <SingleService />,
+									},
+									{
+										path: ':id/edit',
 										element: <AddService />,
 									},
 								],
