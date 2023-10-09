@@ -73,3 +73,11 @@ export interface ResponseService {
 	category_code: string;
 	category_name: string;
 }
+
+export interface ServiceInputValues {
+	name: string;
+	price: string;
+	categoryId: number;
+	isActive: boolean;
+	image: any;
+}

@@ -11,6 +11,7 @@ const SignInUpLayout = React.lazy(() => import('../layouts/sign-in-up-layout'));
 const Services = React.lazy(() => import('../pages/services'));
 const AddService = React.lazy(() => import('../pages/add-service'));
 const SingleService = React.lazy(() => import('../pages/single-service'));
+const EditService = React.lazy(() => import('../pages/edit-service'));
 
 const routes: RouteObject[] = [
 	{
@@ -67,7 +68,7 @@ const routes: RouteObject[] = [
 									},
 									{
 										path: ':id/edit',
-										element: <AddService />,
+										element: <EditService />,
 									},
 								],
 							},

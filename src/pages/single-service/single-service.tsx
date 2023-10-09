@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { Skeleton } from 'antd';
 import { ServiceCard } from '../../components/service-card';
@@ -7,17 +7,18 @@ import BackToPreviousPage from '../../components/back-to-previous-page/back-to-p
 import { useState } from 'react';
 import { ButtonPrimary } from '../../components/button';
 import { DeleteCard } from '../../components/delete-card-modal';
+import useGetPathName from '../../hooks/useGetPathName';
 
 function SingleService() {
-	const id = useLocation().pathname.split('/')[3];
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const id = useGetPathName({ num: 3 });
 
-	const { isLoading, data: service } = useDataFetching<ResponseService>(
+	const { isFetching, data: service } = useDataFetching<ResponseService>(
 		'serviceById',
 		`/service/${id}`,
 		id
 	);
 
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const showModal = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsModalOpen(true);
@@ -27,26 +28,30 @@ function SingleService() {
 		setIsModalOpen(false);
 	};
 	const style =
-		'w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%] border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300 hover:border-none';
+		'border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300 mb-5 hover:border-white';
 
 	return (
 		<div>
 			<div className='my-10'>
 				<BackToPreviousPage title='Back to services' />
-				<div>
-					{isLoading ? (
+				<div className='w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%]'>
+					{isFetching ? (
 						<Skeleton active paragraph={{ rows: 4 }} className={style} />
 					) : (
 						<>
-							<div key={service?.id} className={style}>
-								<ServiceCard service={service as ResponseService} />
+							<div>
+								<div key={service?.id} className={style}>
+									<ServiceCard service={service as ResponseService} />
+								</div>
+								<div className='flex justify-around '>
+									<Link to='edit'>
+										<ButtonPrimary title={'Edit service'} />
+									</Link>
+									<form onSubmit={showModal}>
+										<ButtonPrimary title={'Delete service'} />
+									</form>
+								</div>
 							</div>
-							<form
-								className='w-full sm:w-4/5 xl:w-2/4 2xl:w-1/4 mt-5'
-								onSubmit={showModal}
-							>
-								<ButtonPrimary title={'Delete service'} />
-							</form>
 							<DeleteCard
 								id={id}
 								isModalOpen={isModalOpen}
