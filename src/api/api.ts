@@ -12,7 +12,7 @@ httpClient.interceptors.request.use(
 		const token = getToken(store.getState());
 
 		config.headers.Authorization = token ? token : undefined;
-		config.headers['Accept-Language'] = getFromCookie('language') || 'uz';
+		config.headers['Accept-Language'] = getFromCookie('language') || 'ru';
 		return config;
 	},
 	function (error) {
@@ -28,7 +28,8 @@ httpClient.interceptors.response.use(
 	function (error) {
 		if (
 			error.response.data.type === 'EXPIRED_TOKEN' ||
-			error.response.data.type === 'INVALID_TOKEN'
+			error.response.data.type === 'INVALID_TOKEN' ||
+			error.response.data.type === 'NOT_ALLOWED'
 		) {
 			store.dispatch(deleteToken()); // another way, not to use useDispatch
 		}

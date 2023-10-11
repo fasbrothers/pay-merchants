@@ -4,6 +4,9 @@ import { HeaderMain } from '../components/header-main';
 import { FooterMain } from '../components/footer-main';
 import { Suspense, useState } from 'react';
 import { LoadingLazy } from '../components/loading-lazy';
+import { setLanguage } from '../utils/cookies';
+import { useDataFetching } from '../hooks/useDataFetching';
+import { IProfileResponse } from '../@types/inputs-type';
 
 export default function MainLayout() {
 	const [showNavbar, setShowNavbar] = useState<boolean>(false);
@@ -13,6 +16,12 @@ export default function MainLayout() {
 		?.map(el => el[0].toUpperCase() + el.slice(1))
 		.join(' ');
 
+	const { data: profile, isLoading } = useDataFetching<IProfileResponse>(
+		'profile',
+		'/merchant/profile'
+	);
+
+	!isLoading && setLanguage('language', profile?.lang as string);
 	return (
 		<div className='w-full flex min-h-screen'>
 			<SidebarInMain
@@ -35,7 +44,7 @@ export default function MainLayout() {
 						<Outlet />
 					</div>
 				</Suspense>
-				<FooterMain />
+				<FooterMain language={profile?.lang as string} />
 			</div>
 		</div>
 	);

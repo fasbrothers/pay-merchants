@@ -12,6 +12,7 @@ const Services = React.lazy(() => import('../pages/services'));
 const AddService = React.lazy(() => import('../pages/add-service'));
 const SingleService = React.lazy(() => import('../pages/single-service'));
 const EditService = React.lazy(() => import('../pages/edit-service'));
+const ProfileSettings = React.lazy(() => import('../pages/profile-settings'));
 
 const routes: RouteObject[] = [
 	{
@@ -51,6 +52,7 @@ const routes: RouteObject[] = [
 						children: [
 							{ path: 'dashboard', element: <Main /> },
 							{ path: '*', element: <NotFound /> },
+							{ path: 'profile-settings', element: <ProfileSettings /> },
 							{
 								path: 'services',
 								children: [

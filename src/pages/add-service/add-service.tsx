@@ -1,12 +1,7 @@
-import {
-	ErrorResponse,
-	ServiceInputValues,
-	ServiceResponse,
-} from '../../@types/inputs-type';
+import { ServiceInputValues, ServiceResponse } from '../../@types/inputs-type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { httpClient } from '../../api';
-import toastMessage, { toastSuccessMessage } from '../../utils/toast-message';
-import { AxiosError } from 'axios';
+import { toastSuccessMessage } from '../../utils/toast-message';
 import { useNavigate } from 'react-router-dom';
 import { ServiceForm } from '../../components/service-form';
 
@@ -31,11 +26,6 @@ function AddService() {
 			return data;
 		},
 		{
-			onError: (error: AxiosError<ErrorResponse>) => {
-				toastMessage(
-					error?.response?.data.message || error?.message || 'Error'
-				);
-			},
 			onSuccess: () => {
 				navigate('/cabinet/services');
 				query.invalidateQueries(['services']);

@@ -1,6 +1,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import type { MenuProps } from 'antd';
-import { Button, Dropdown, Skeleton } from 'antd';
+import { Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux-hooks';
@@ -8,7 +8,6 @@ import { deleteToken } from '../../store/slices/authSlice';
 import logo from '../../assets/logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useQueryClient } from '@tanstack/react-query';
-import { useDataFetching } from '../../hooks/useDataFetching';
 
 interface Props {
 	setShowNavbar: (showNavbar: boolean) => void;
@@ -26,11 +25,6 @@ export const HeaderMain = ({ setShowNavbar, showNavbar, title }: Props) => {
 		queryClient.removeQueries();
 		navigate('/auth');
 	};
-
-	const { isLoading, data: profile } = useDataFetching<any>(
-		'profile',
-		'merchant/profile'
-	);
 
 	const items: MenuProps['items'] = [
 		{
@@ -54,19 +48,7 @@ export const HeaderMain = ({ setShowNavbar, showNavbar, title }: Props) => {
 			<div className='flex items-center'>
 				<Dropdown menu={{ items }} placement='bottom'>
 					<Button className='flex items-center border-none shadow-none'>
-						{isLoading ? (
-							<Skeleton.Avatar active size={'default'} shape='circle' />
-						) : profile?.image_url ? (
-							<div>
-								<img
-									src={profile.image_url}
-									className='rounded-[50%] w-[40px] object-contain'
-									alt={profile.name}
-								/>
-							</div>
-						) : (
-							<AccountCircleIcon className='text-gray-600' fontSize='large' />
-						)}
+						<AccountCircleIcon className='text-gray-600' fontSize='large' />
 					</Button>
 				</Dropdown>
 				<Button

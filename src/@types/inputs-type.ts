@@ -81,3 +81,11 @@ export interface ServiceInputValues {
 	isActive: boolean;
 	image: any;
 }
+
+export interface IProfileResponse {
+	id: string;
+	name: string;
+	email: string;
+	reg_date: string;
+	lang: string;
+}
