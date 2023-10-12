@@ -25,6 +25,7 @@ function EditService() {
 		async (values: ServiceInputValues) => {
 			const formData = new FormData();
 			values.image && formData.append('image', values.image.file.originFileObj);
+			values.deleteImage && formData.append('deleteImage', 'true');
 			formData.append('isActive', values.isActive.toString());
 			formData.append('name', values.name);
 			formData.append('price', values.price);
@@ -57,6 +58,7 @@ function EditService() {
 			buttonText='Update service'
 			service={service}
 			loadService={loadService}
+			deleteImage={true}
 		/>
 	);
 }

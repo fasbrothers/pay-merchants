@@ -18,6 +18,7 @@ interface ServiceFormProps {
 	buttonText: string;
 	service?: ResponseService;
 	loadService?: boolean;
+	deleteImage?: boolean;
 }
 
 export const ServiceForm = ({
@@ -27,6 +28,7 @@ export const ServiceForm = ({
 	buttonText,
 	service,
 	loadService = false,
+	deleteImage = false,
 }: ServiceFormProps) => {
 	const [form] = Form.useForm();
 	const [image, setImage] = useState(false);
@@ -89,6 +91,9 @@ export const ServiceForm = ({
 							</div>
 						</Upload>
 					</Form.Item>
+					{deleteImage && (
+						<CheckBox title='Delete a image' name='deleteImage' />
+					)}
 					<Form.Item
 						name='name'
 						label='Name'
@@ -108,7 +113,6 @@ export const ServiceForm = ({
 					>
 						<Input name='name' className='input__style' />
 					</Form.Item>
-
 					<Form.Item
 						name='price'
 						label='Price'

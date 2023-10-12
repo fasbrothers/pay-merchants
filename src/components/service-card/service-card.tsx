@@ -1,5 +1,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ResponseService } from '../../@types/inputs-type';
+import { currencyFormat } from '../../utils/currencyFormat';
 
 export const ServiceCard = ({ service }: { service: ResponseService }) => {
 	return (
@@ -9,7 +10,7 @@ export const ServiceCard = ({ service }: { service: ResponseService }) => {
 					<h3 className='font-bold xl:text-lg truncate'>{service.name}</h3>
 					<h5 className='text-sm'>{service.category_name}</h5>
 				</div>
-				<p className='font-bold xl:text-lg'>Price: {service.price}</p>
+				<p className='font-bold xl:text-lg'>{currencyFormat(service.price)}sum</p>
 			</div>
 			<div className='w-1/3 flex flex-col items-center'>
 				{service.image_url === null ? (

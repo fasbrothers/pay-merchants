@@ -80,6 +80,7 @@ export interface ServiceInputValues {
 	categoryId: number;
 	isActive: boolean;
 	image: any;
+	deleteImage?: boolean;
 }
 
 export interface IProfileResponse {
