@@ -38,7 +38,7 @@ function AddService() {
 		<ServiceForm
 			loading={loading}
 			mutate={mutate}
-			title='All Services'
+			title='Add Service'
 			buttonText='Create service'
 		/>
 	);

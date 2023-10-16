@@ -50,8 +50,8 @@ export interface Service {
 	merchant_id: string;
 	category_id: number;
 	name: string;
-	price: number;
-	image_url: string;
+	price: string;
+	image_url?: string;
 	is_active: boolean;
 	category_code: string;
 	category_name: string;
@@ -67,7 +67,7 @@ export interface ResponseService {
 	merchant_id: string;
 	category_id: number;
 	name: string;
-	price: number;
+	price: string;
 	image_url?: string;
 	is_active: boolean;
 	category_code: string;
@@ -89,4 +89,5 @@ export interface IProfileResponse {
 	email: string;
 	reg_date: string;
 	lang: string;
+	balance: string;
 }

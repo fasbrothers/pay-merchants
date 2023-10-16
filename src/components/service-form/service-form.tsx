@@ -91,7 +91,7 @@ export const ServiceForm = ({
 							</div>
 						</Upload>
 					</Form.Item>
-					{deleteImage && (
+					{deleteImage && service?.image_url && (
 						<CheckBox title='Delete a image' name='deleteImage' />
 					)}
 					<Form.Item

@@ -41,7 +41,7 @@ export default function Services() {
 	const [activeStatus, setActiveStatus] = useState<string>(status[0].title);
 
 	const style =
-		'w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%] border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300 hover:border-white';
+		'w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%] border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300';
 
 	return (
 		<div>
@@ -60,8 +60,10 @@ export default function Services() {
 						<div
 							key={el.id}
 							onClick={() => setActiveStatus(el.title)}
-							className={`bg-gray-100 rounded-[12px] hover:bg-black duration-200 hover:text-white cursor-pointer py-3 px-2 ${
-								activeStatus === el.title && 'bg-black text-white'
+							className={` rounded-[12px] hover:bg-black duration-200 hover:text-white cursor-pointer py-3 px-2 ${
+								activeStatus === el.title
+									? 'bg-black text-white'
+									: 'bg-gray-100'
 							}`}
 						>
 							{el.title}

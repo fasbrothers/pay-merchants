@@ -28,12 +28,12 @@ function SingleService() {
 		setIsModalOpen(false);
 	};
 	const style =
-		'border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300 mb-5 hover:border-white';
+		'border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300 mb-5	';
 
 	return (
 		<div>
 			<div className='my-10'>
-				<BackToPreviousPage title='Back to services' />
+				<BackToPreviousPage title='Service Details' />
 				<div className='w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%]'>
 					{isFetching ? (
 						<Skeleton active paragraph={{ rows: 4 }} className={style} />
