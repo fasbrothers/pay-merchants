@@ -33,7 +33,7 @@ export const HeaderMain = ({ setShowNavbar, showNavbar, title }: Props) => {
 		},
 		{
 			key: '2',
-			label: <button onClick={handleLogout}>Logout</button>,
+			label: <button onClick={() => handleLogout()}>Logout</button>,
 		},
 	];
 

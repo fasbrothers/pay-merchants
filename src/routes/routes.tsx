@@ -46,7 +46,7 @@ const routes: RouteObject[] = [
 				children: [
 					{
 						index: true,
-						element: <Navigate to='dashboard' />,
+						element: <Navigate to='services' />,
 					},
 					{
 						children: [
