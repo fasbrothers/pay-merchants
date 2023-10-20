@@ -2,11 +2,11 @@ import { QRCode } from 'antd';
 import { ButtonPrimary } from '../button';
 
 interface GenerateQrProps {
-	publicKey: string;
+	url: string;
 	name: string;
 }
 
-export const GenerateQr = ({ publicKey, name }: GenerateQrProps) => {
+export const GenerateQr = ({ url, name }: GenerateQrProps) => {
 	const downloadQRCode = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const canvas = document
@@ -24,11 +24,7 @@ export const GenerateQr = ({ publicKey, name }: GenerateQrProps) => {
 	};
 	return (
 		<div id='myqrcode'>
-			<QRCode
-				value={`https://atto-pay.vercel.app/qr/${publicKey}`}
-				bgColor='#fff'
-				style={{ marginBottom: 16 }}
-			/>
+			<QRCode value={url} bgColor='#fff' style={{ marginBottom: 16 }} />
 			<form onSubmit={e => downloadQRCode(e)} className='mt-6'>
 				<ButtonPrimary title='Download' />
 			</form>

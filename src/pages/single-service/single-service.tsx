@@ -68,7 +68,7 @@ function SingleService() {
 									/>
 								</div>
 								<GenerateQr
-									publicKey={service.public_key}
+									url={`https://atto-pay.vercel.app/cabinet/qr/${service.public_key}`}
 									name={service.name}
 								/>
 							</div>
