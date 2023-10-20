@@ -10,6 +10,7 @@ import {
 } from '../../@types/inputs-type';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { useState } from 'react';
+import { MaskedInput } from 'antd-mask-input';
 
 interface ServiceFormProps {
 	loading: boolean;
@@ -61,7 +62,7 @@ export const ServiceForm = ({
 					className={style}
 					initialValues={{
 						name: service?.name,
-						price: service?.price,
+						price: service?.price && Number(service?.price).toFixed(0),
 						categoryId: service?.category_id,
 						isActive: service?.is_active,
 					}}
@@ -118,9 +119,19 @@ export const ServiceForm = ({
 						label='Price'
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
-						rules={[{ required: true, message: 'Please input your price!' }]}
+						rules={[
+							{ required: true, message: 'Please input your price!' },
+							{
+								pattern: /^[1-9]\d*$/,
+								message: 'Must be a valid price',
+							},
+						]}
 					>
-						<Input className='input__style' name='phone' />
+						<MaskedInput
+							maskOptions={{ lazy: true }}
+							mask={'000000000000'}
+							className='input__style'
+						/>
 					</Form.Item>
 					<Form.Item
 						label='Select'

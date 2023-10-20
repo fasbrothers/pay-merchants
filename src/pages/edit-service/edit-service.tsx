@@ -1,15 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { ServiceForm } from '../../components/service-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-	ErrorResponse,
 	ResponseService,
 	ServiceInputValues,
 	ServiceResponse,
 } from '../../@types/inputs-type';
 import { httpClient } from '../../api';
-import { AxiosError } from 'axios';
-import toastMessage, { toastSuccessMessage } from '../../utils/toast-message';
+import { toastSuccessMessage } from '../../utils/toast-message';
 import useGetPathName from '../../hooks/useGetPathName';
 import { useDataFetching } from '../../hooks/useDataFetching';
 
@@ -17,9 +15,10 @@ function EditService() {
 	const navigate = useNavigate();
 
 	const id = useGetPathName({ num: 3 });
+	const query = useQueryClient();
 
 	const { isLoading: loadService, data: service } =
-		useDataFetching<ResponseService>('service', `/service/${id}`, id);
+		useDataFetching<ResponseService>('serviceById', `/service/${id}`, id);
 
 	const { isLoading: loading, mutate } = useMutation(
 		async (values: ServiceInputValues) => {
@@ -39,13 +38,9 @@ function EditService() {
 			return data;
 		},
 		{
-			onError: (error: AxiosError<ErrorResponse>) => {
-				toastMessage(
-					error?.response?.data.message || error?.message || 'Error'
-				);
-			},
 			onSuccess: () => {
 				navigate('/cabinet/services/' + id);
+				query.invalidateQueries(['serviceById']);
 				toastSuccessMessage('Service updated successfully');
 			},
 		}

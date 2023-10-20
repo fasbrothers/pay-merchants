@@ -4,7 +4,6 @@ import { Form, Select } from 'antd';
 import { httpClient } from '../../api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { toastSuccessMessage } from '../../utils/toast-message';
 import { setLanguage as cookieLanguage } from '../../utils/cookies';
 
 export const FooterMain = ({ language }: { language: string }) => {
@@ -30,8 +29,7 @@ export const FooterMain = ({ language }: { language: string }) => {
 		},
 		{
 			onSuccess: () => {
-				toastSuccessMessage('Language changed successfully');
-				query.invalidateQueries(['services']);
+				query.invalidateQueries();
 			},
 		}
 	);
@@ -40,7 +38,10 @@ export const FooterMain = ({ language }: { language: string }) => {
 		<div className='lg:h-[8vh] border-t border-gray-200 flex flex-col md:flex-row justify-between items-center mt-2 xl:mt-0 py-4 lg:py-0'>
 			<div>
 				{footerList.map((item, index) => (
-					<p key={index} className='inline-block mr-6 font-bold text-sm cursor-pointer'>
+					<p
+						key={index}
+						className='inline-block mr-6 font-bold text-sm cursor-pointer'
+					>
 						{item}
 					</p>
 				))}

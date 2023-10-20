@@ -12,7 +12,7 @@ httpClient.interceptors.request.use(
 		const token = getToken(store.getState());
 
 		config.headers.Authorization = token ? token : undefined;
-		config.headers['Accept-Language'] = getFromCookie('language') || 'ru';
+		config.headers['Accept-Language'] = getFromCookie('language') || 'en';
 		return config;
 	},
 	function (error) {

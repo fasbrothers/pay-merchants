@@ -72,6 +72,7 @@ export interface ResponseService {
 	is_active: boolean;
 	category_code: string;
 	category_name: string;
+	public_key: string;
 }
 
 export interface ServiceInputValues {
