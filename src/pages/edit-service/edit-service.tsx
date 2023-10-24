@@ -9,9 +9,8 @@ import { ServiceForm } from '../../components/service';
 
 function EditService() {
 	const navigate = useNavigate();
-
-	const id = useGetPathName({ num: 3 });
 	const query = useQueryClient();
+	const id = useGetPathName({ num: 3 });
 
 	const { isLoading: loadService, data: service } = useDataFetching<Service>(
 		'serviceById',
@@ -30,14 +29,13 @@ function EditService() {
 			formData.append('categoryId', values.categoryId.toString());
 			formData.append('id', id.toString());
 
-			const { data } = await httpClient.put<Service>('/service', formData);
-			return data;
+			const { data } = await httpClient.put('/service', formData);
+			data.message ? toastSuccessMessage(data.message) : null;
 		},
 		{
 			onSuccess: () => {
 				navigate('/cabinet/services/' + id);
 				query.invalidateQueries(['serviceById']);
-				toastSuccessMessage('Service updated successfully');
 			},
 		}
 	);

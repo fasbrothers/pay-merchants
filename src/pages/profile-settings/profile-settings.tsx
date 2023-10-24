@@ -41,8 +41,8 @@ function ProfileSettings() {
 							</div>
 						</div>
 					</div>
-					<form className='w-48 mt-10' onSubmit={showModal}>
-						<ButtonPrimary title='Update Settings' />
+					<form className='mt-10' onSubmit={showModal}>
+						<ButtonPrimary title='Update Settings' weight='200px' />
 					</form>
 					<ModelForm
 						isModalOpen={isModalOpen}

@@ -15,6 +15,7 @@ export default function SignInUpLayout() {
 		</div>
 	);
 }
+
 function AuthContentLoader() {
 	return (
 		<div className='flex justify-center items-center w-4/6'>

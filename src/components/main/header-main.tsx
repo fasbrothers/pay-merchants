@@ -22,7 +22,7 @@ export const HeaderMain = ({
 	const handleLogout = () => {
 		dispatch(deleteToken());
 		queryClient.removeQueries();
-		navigate('/auth');
+		navigate('/auth/login');
 	};
 
 	const items: MenuProps['items'] = [

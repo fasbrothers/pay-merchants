@@ -16,7 +16,6 @@ export const FooterMain = ({ language }: { language: string }) => {
 		ru: 'Russian',
 	};
 	useEffect(() => {
-		// Update the initialValue of Form.Item based on the new language
 		form.setFieldsValue({
 			setLanguage: languageMap[language],
 		});

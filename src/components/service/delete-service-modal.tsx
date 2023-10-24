@@ -11,7 +11,6 @@ export function DeleteService({
 	setIsModalOpen,
 	handleCancel,
 	url,
-	successMessage,
 	navigateUrl,
 	modalTitle,
 	modalMessage,
@@ -24,13 +23,13 @@ export function DeleteService({
 				data: { id },
 			});
 			setIsModalOpen(false);
-			return data;
+			data.message ? toastSuccessMessage(data.message) : null;
 		},
 		onSuccess: () => {
 			navigate(navigateUrl);
-			toastSuccessMessage(successMessage);
 		},
 	});
+
 	return (
 		<Modal
 			title={modalTitle}

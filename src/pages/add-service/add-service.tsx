@@ -2,10 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { httpClient } from '../../api';
 import { toastSuccessMessage } from '../../utils/toast-message';
 import { useNavigate } from 'react-router-dom';
-import {
-	ServiceInputValues,
-	ServiceResponse,
-} from '../../@types/service.types';
+import { ServiceInputValues } from '../../@types/service.types';
 import { ServiceForm } from '../../components/service';
 
 function AddService() {
@@ -22,17 +19,13 @@ function AddService() {
 			formData.append('price', values.price);
 			formData.append('categoryId', values.categoryId.toString());
 
-			const { data } = await httpClient.post<ServiceResponse>(
-				'/service',
-				formData
-			);
-			return data;
+			const { data } = await httpClient.post('/service', formData);
+			data.message ? toastSuccessMessage(data.message) : null;
 		},
 		{
 			onSuccess: () => {
 				navigate('/cabinet/services');
 				query.invalidateQueries(['services']);
-				toastSuccessMessage('Service added successfully');
 			},
 		}
 	);

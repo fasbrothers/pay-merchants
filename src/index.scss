@@ -13,9 +13,30 @@
 body {
 	font-family: 'Inter', sans-serif;
 
-	span {
+	span,
+	label {
 		font-family: 'Inter', sans-serif;
 	}
+		.ant-form-item {
+			&-required {
+				font-family: 'Inter', sans-serif;
+			}
+	
+			&-explain-error {
+				font-family: 'Inter', sans-serif;
+			}
+	
+			input {
+				font-family: 'Inter', sans-serif;
+			}
+			.ant-checkbox-checked .ant-checkbox-inner {
+				padding: 10px;
+	
+				&::after {
+					margin-left: 2px;
+				}
+			}
+		}
 }
 
 .profile__modal .ant-modal-footer {

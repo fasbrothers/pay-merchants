@@ -59,7 +59,6 @@ function SingleService() {
 										setIsModalOpen={setIsModalOpen}
 										handleCancel={handleCancel}
 										url='/service'
-										successMessage='Service deleted successfully'
 										navigateUrl='/cabinet/services'
 										modalTitle='Delete service'
 										modalMessage='Do you really want to delete this service?'

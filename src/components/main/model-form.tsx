@@ -20,9 +20,10 @@ export const ModelForm = ({
 
 	const handleSubmit = async (values: InputValues) => {
 		const formData = new FormData();
-		values?.name && formData.append('name', values.name);
+		values.name && formData.append('name', values.name);
 
-		await httpClient.put('/merchant/profile', formData);
+		const { data } = await httpClient.put('/merchant/profile', formData);
+		data.message ? toastSuccessMessage(data.message) : null;
 		setIsModalOpen(false);
 	};
 
@@ -30,7 +31,6 @@ export const ModelForm = ({
 		mutationFn: (values: InputValues) => handleSubmit(values),
 		onSuccess: () => {
 			queryClient.invalidateQueries(['profile']);
-			toastSuccessMessage('Profile updated successfully');
 		},
 	});
 

@@ -45,7 +45,6 @@ export interface DeleteServiceProps {
 	setIsModalOpen: (value: boolean) => void;
 	handleCancel: () => void;
 	url: string;
-	successMessage: string;
 	navigateUrl: string;
 	modalTitle: string;
 	modalMessage: string;

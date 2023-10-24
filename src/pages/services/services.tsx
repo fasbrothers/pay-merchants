@@ -1,37 +1,10 @@
 import { Skeleton } from 'antd';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { Link } from 'react-router-dom';
-
 import { useState } from 'react';
 import { AddTitle } from '../../components/shared';
 import { ServiceCard } from '../../components/service';
 import { ResponseServices, Service } from '../../@types/service.types';
-
-const status = [
-	{
-		id: 1,
-		title: 'All Services',
-	},
-	{
-		id: 2,
-		title: 'Active',
-	},
-	{
-		id: 3,
-		title: 'Not Active',
-	},
-];
-
-// Filtering function
-function filterServices(services: Service[], activeStatus: string): Service[] {
-	if (activeStatus === 'Active') {
-		return services.filter(service => service.is_active === true);
-	} else if (activeStatus === 'Not Active') {
-		return services.filter(service => service.is_active === false);
-	}
-	// For 'All Services' or any other case, return all services
-	return services;
-}
 
 export default function Services() {
 	const { isLoading, data } = useDataFetching<ResponseServices>(
@@ -101,3 +74,27 @@ export default function Services() {
 		</div>
 	);
 }
+
+function filterServices(services: Service[], activeStatus: string): Service[] {
+	if (activeStatus === 'Active') {
+		return services.filter(service => service.is_active === true);
+	} else if (activeStatus === 'Not Active') {
+		return services.filter(service => service.is_active === false);
+	}
+	return services;
+}
+
+const status = [
+	{
+		id: 1,
+		title: 'All Services',
+	},
+	{
+		id: 2,
+		title: 'Active',
+	},
+	{
+		id: 3,
+		title: 'Not Active',
+	},
+];

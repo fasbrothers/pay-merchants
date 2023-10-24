@@ -23,6 +23,7 @@ export const SidebarInMain = ({
 	const [showBalance, setShowBalance] = useState<boolean>(false);
 
 	const highlightedStyle = 'border-blue-600 text-blue-900 border-r-2';
+
 	return (
 		<div
 			className={`${

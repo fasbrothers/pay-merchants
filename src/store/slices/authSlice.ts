@@ -4,14 +4,12 @@ import type { RootState } from '../store';
 import { getFromCookie, removeFromCookie, setToken } from '../../utils/cookies';
 import { AuthState } from '../../@types/auth.types';
 
-// Define the initial state using that type
 const initialState: AuthState = {
 	token: getFromCookie('token'),
 };
 
 export const authSlice = createSlice({
 	name: 'auth',
-	// `createSlice` will infer the state type from the `initialState` argument
 	initialState,
 	reducers: {
 		accessToken: (state, action: PayloadAction<string>) => {
@@ -28,7 +26,6 @@ export const authSlice = createSlice({
 
 export const { accessToken, deleteToken } = authSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const token = (state: RootState) => state.auth.token;
 
 export const getToken = (state: RootState) => state.auth.token;
