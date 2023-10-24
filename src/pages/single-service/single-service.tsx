@@ -1,19 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { Skeleton } from 'antd';
-import { ServiceCard } from '../../components/service-card';
-import { ResponseService } from '../../@types/inputs-type';
-import BackToPreviousPage from '../../components/back-to-previous-page/back-to-previous-page';
 import { useState } from 'react';
-import { ButtonPrimary } from '../../components/button';
-import { DeleteCard } from '../../components/delete-card-modal';
 import useGetPathName from '../../hooks/useGetPathName';
 import { GenerateQr } from '../../components/generate-qr';
+import { Service } from '../../@types/service.types';
+import { BackToPreviousPage, ButtonPrimary } from '../../components/shared';
+import { DeleteService, ServiceCard } from '../../components/service';
 
 function SingleService() {
 	const id = useGetPathName({ num: 3 });
 
-	const { isLoading, data: service } = useDataFetching<ResponseService>(
+	const { isLoading, data: service } = useDataFetching<Service>(
 		'serviceById',
 		`/service/${id}`,
 		id
@@ -44,7 +42,7 @@ function SingleService() {
 								<div className='w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%]'>
 									<div>
 										<div key={service.id} className={style}>
-											<ServiceCard service={service as ResponseService} />
+											<ServiceCard service={service as Service} />
 										</div>
 										<div className='flex justify-around '>
 											<Link to='edit'>
@@ -55,7 +53,7 @@ function SingleService() {
 											</form>
 										</div>
 									</div>
-									<DeleteCard
+									<DeleteService
 										id={id}
 										isModalOpen={isModalOpen}
 										setIsModalOpen={setIsModalOpen}

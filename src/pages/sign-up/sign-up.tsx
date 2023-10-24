@@ -1,13 +1,11 @@
 import logo from '../../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import './sign-up.scss';
-import { AuthImageTitle } from '../../components/auth-image-title';
 import { useMutation } from '@tanstack/react-query';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { accessToken } from '../../store/slices/authSlice';
-import SignUpForm from './components/sign-up-form';
-import { IResponse, InputValues } from '../../@types/inputs-type';
+import { AuthResponse, InputValues } from '../../@types/auth.types';
 import { httpClient } from '../../api';
+import { AuthImageTitle, SignUpForm } from '../../components/auth';
 
 export default function SignUp() {
 	const navigate = useNavigate();
@@ -15,7 +13,7 @@ export default function SignUp() {
 
 	const handleSubmit = async (values: InputValues) => {
 		const { name, email, password } = values;
-		const { data } = await httpClient.post<IResponse>('/merchant/register', {
+		const { data } = await httpClient.post<AuthResponse>('/merchant/register', {
 			name,
 			email,
 			password,

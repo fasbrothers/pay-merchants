@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { SignSidebar } from '../components/sign-sidebar';
 import { Spin } from 'antd';
+import { SignSidebar } from '../components/auth';
 
 export default function SignInUpLayout() {
 	return (

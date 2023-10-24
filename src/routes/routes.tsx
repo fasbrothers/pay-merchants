@@ -83,5 +83,5 @@ const routes: RouteObject[] = [
 ];
 
 export function Routes() {
-	return useRoutes([...routes]);
+	return useRoutes(routes);
 }

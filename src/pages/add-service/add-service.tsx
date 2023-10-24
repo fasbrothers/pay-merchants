@@ -1,9 +1,12 @@
-import { ServiceInputValues, ServiceResponse } from '../../@types/inputs-type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { httpClient } from '../../api';
 import { toastSuccessMessage } from '../../utils/toast-message';
 import { useNavigate } from 'react-router-dom';
-import { ServiceForm } from '../../components/service-form';
+import {
+	ServiceInputValues,
+	ServiceResponse,
+} from '../../@types/service.types';
+import { ServiceForm } from '../../components/service';
 
 function AddService() {
 	const navigate = useNavigate();

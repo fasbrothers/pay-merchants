@@ -1,11 +1,11 @@
 import { Skeleton } from 'antd';
-import { AddTitle } from '../../components/add-title';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { Link } from 'react-router-dom';
-import { ResponseServices, Service } from '../../@types/inputs-type';
 
 import { useState } from 'react';
-import { ServiceCard } from '../../components/service-card';
+import { AddTitle } from '../../components/shared';
+import { ServiceCard } from '../../components/service';
+import { ResponseServices, Service } from '../../@types/service.types';
 
 const status = [
 	{

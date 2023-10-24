@@ -1,12 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { SidebarInMain } from '../components/sidebar-in-main';
-import { HeaderMain } from '../components/header-main';
-import { FooterMain } from '../components/footer-main';
 import { Suspense, useState } from 'react';
-import { LoadingLazy } from '../components/loading-lazy';
+import { LoadingLazy } from '../components/shared/loading-lazy';
 import { setLanguage } from '../utils/cookies';
 import { useDataFetching } from '../hooks/useDataFetching';
-import { IProfileResponse } from '../@types/inputs-type';
+import { ProfileResponse } from '../@types/profile.types';
+import { FooterMain, HeaderMain, SidebarInMain } from '../components/main';
 
 export default function MainLayout() {
 	const [showNavbar, setShowNavbar] = useState<boolean>(false);
@@ -16,7 +14,7 @@ export default function MainLayout() {
 		?.map(el => el[0].toUpperCase() + el.slice(1))
 		.join(' ');
 
-	const { data: profile, isLoading } = useDataFetching<IProfileResponse>(
+	const { data: profile, isLoading } = useDataFetching<ProfileResponse>(
 		'profile',
 		'/merchant/profile'
 	);

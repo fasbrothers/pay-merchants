@@ -1,10 +1,6 @@
 import { QRCode } from 'antd';
-import { ButtonPrimary } from '../button';
-
-interface GenerateQrProps {
-	url: string;
-	name: string;
-}
+import { ButtonPrimary } from '../shared/button';
+import { GenerateQrProps } from '../../@types/qr.types';
 
 export const GenerateQr = ({ url, name }: GenerateQrProps) => {
 	const downloadQRCode = (e: React.FormEvent<HTMLFormElement>) => {

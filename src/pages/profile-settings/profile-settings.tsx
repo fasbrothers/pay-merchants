@@ -1,14 +1,14 @@
-import { ButtonPrimary } from '../../components/button';
+import { ButtonPrimary } from '../../components/shared/button';
 import { Skeleton } from 'antd';
 import { useState } from 'react';
-import ModelForm from './components/model-form';
 import { useDataFetching } from '../../hooks/useDataFetching';
-import { IProfileResponse } from '../../@types/inputs-type';
+import { ProfileResponse } from '../../@types/profile.types';
+import { ModelForm } from '../../components/main';
 
 function ProfileSettings() {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	const { isLoading, data: profile } = useDataFetching<IProfileResponse>(
+	const { isLoading, data: profile } = useDataFetching<ProfileResponse>(
 		'profile',
 		'merchant/profile'
 	);
@@ -32,7 +32,7 @@ function ProfileSettings() {
 								<h3 className='mt-1 font-bold'>{profile?.name}</h3>
 							</div>
 							<div className='border-b-2 py-3 border-gray-200'>
-								<p className='text-sm'>Phone number</p>
+								<p className='text-sm'>Email</p>
 								<h3 className='mt-1 font-bold'>{profile?.email}</h3>
 							</div>
 							<div className='py-3'>

@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { ServiceForm } from '../../components/service-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-	ResponseService,
-	ServiceInputValues,
-	ServiceResponse,
-} from '../../@types/inputs-type';
 import { httpClient } from '../../api';
 import { toastSuccessMessage } from '../../utils/toast-message';
 import useGetPathName from '../../hooks/useGetPathName';
 import { useDataFetching } from '../../hooks/useDataFetching';
+import { Service, ServiceInputValues } from '../../@types/service.types';
+import { ServiceForm } from '../../components/service';
 
 function EditService() {
 	const navigate = useNavigate();
@@ -17,8 +13,11 @@ function EditService() {
 	const id = useGetPathName({ num: 3 });
 	const query = useQueryClient();
 
-	const { isLoading: loadService, data: service } =
-		useDataFetching<ResponseService>('serviceById', `/service/${id}`, id);
+	const { isLoading: loadService, data: service } = useDataFetching<Service>(
+		'serviceById',
+		`/service/${id}`,
+		id
+	);
 
 	const { isLoading: loading, mutate } = useMutation(
 		async (values: ServiceInputValues) => {
@@ -31,10 +30,7 @@ function EditService() {
 			formData.append('categoryId', values.categoryId.toString());
 			formData.append('id', id.toString());
 
-			const { data } = await httpClient.put<ServiceResponse>(
-				'/service',
-				formData
-			);
+			const { data } = await httpClient.put<Service>('/service', formData);
 			return data;
 		},
 		{

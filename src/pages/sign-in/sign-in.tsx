@@ -1,13 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
-import { IResponse, InputValues } from '../../@types/inputs-type';
-import logo from '../../assets/logo.svg';
-import { AuthImageTitle } from '../../components/auth-image-title';
+import { AuthResponse, InputValues } from '../../@types/auth.types';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { accessToken } from '../../store/slices/authSlice';
-import '../sign-up/sign-up.scss';
-import SignInForm from './components/sign-in-form';
+import logo from '../../assets/logo.svg';
 import { httpClient } from '../../api';
+import { AuthImageTitle, SignInForm } from '../../components/auth';
 
 export default function SignIn() {
 	const dispatch = useAppDispatch();
@@ -16,7 +14,7 @@ export default function SignIn() {
 	const handleSubmit = async (values: InputValues) => {
 		const { password, email } = values;
 
-		const { data } = await httpClient.post<IResponse>('/merchant/login', {
+		const { data } = await httpClient.post<AuthResponse>('/merchant/login', {
 			password,
 			email,
 		});
