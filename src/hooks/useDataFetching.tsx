@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { ErrorResponse } from '../@types/auth.types';
 import toastMessage from '../utils/toast-message';
 import { httpClient } from '../api';
+import { ErrorResponse } from '../@types/error.types';
 
 export const useDataFetching = <T,>(
 	key: string,

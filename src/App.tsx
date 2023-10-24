@@ -10,8 +10,8 @@ import { store } from './store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AxiosError } from 'axios';
-import { ErrorResponse } from './@types/auth.types';
 import toastMessage from './utils/toast-message';
+import { ErrorResponse } from './@types/error.types';
 
 function App() {
 	const queryClient = new QueryClient({
