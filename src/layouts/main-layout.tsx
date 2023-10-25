@@ -10,15 +10,18 @@ export default function MainLayout() {
 	const [showNavbar, setShowNavbar] = useState<boolean>(false);
 	const { pathname } = useLocation();
 
-	const title = useMemo(
-		() =>
-			pathname
+	const title = useMemo(() => {
+		if (pathname.split('/')[1] === 'cabinet') {
+			return pathname
 				.split('/')[2]
 				?.split('-')
 				?.map(el => el[0].toUpperCase() + el.slice(1))
-				.join(' '),
-		[pathname]
-	);
+				.join(' ')
+				.toLowerCase();
+		} else {
+			return '';
+		}
+	}, [pathname]);
 
 	const { data: profile, isLoading } = useDataFetching<ProfileResponse>(
 		'profile',
@@ -32,7 +35,7 @@ export default function MainLayout() {
 			<SidebarInMain
 				showNavbar={showNavbar}
 				setShowNavbar={setShowNavbar}
-				title={title.toLowerCase()}
+				title={title}
 				balance={profile?.balance || ''}
 			/>
 			<div
