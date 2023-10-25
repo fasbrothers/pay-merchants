@@ -18,7 +18,7 @@ export const authSlice = createSlice({
 		},
 		deleteToken: state => {
 			state.token = undefined;
-
+			
 			removeFromCookie('token');
 		},
 	},

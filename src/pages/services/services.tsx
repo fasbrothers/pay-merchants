@@ -38,12 +38,12 @@ export default function Services() {
 				</div>
 			</div>
 			{data?.count && data?.count > 0 ? (
-				<div className='h-16 bg-gray-100 rounded-2xl flex justify-around items-center w-[340px] p-2 gap-x-2 mt-5'>
+				<div className='h-16 bg-gray-100 rounded-2xl flex justify-around items-center w-[320px] sm:w-[340px] p-2 gap-x-2 mt-5'>
 					{status.map(el => (
 						<div
 							key={el.id}
 							onClick={() => setActiveStatus(el.code)}
-							className={` rounded-[12px] hover:bg-black duration-200 hover:text-white cursor-pointer py-3 px-2 ${
+							className={` rounded-[12px] hover:bg-black duration-200 hover:text-white cursor-pointer py-3 px-1 sm:px-2 ${
 								activeStatus === el.code ? 'bg-black text-white' : 'bg-gray-100'
 							}`}
 						>

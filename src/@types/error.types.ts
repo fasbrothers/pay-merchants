@@ -1,9 +1,13 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface ErrorResponse {
 	message: string;
 	status: number;
-	types: string;
+	type: string;
+	info: {
+		message: string;
+		timeLeft: number;
+	};
 }
 
 export interface ErrorBoundaryProps {

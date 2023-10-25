@@ -15,3 +15,8 @@ export function setToken(token: string) {
 export function setLanguage(title: string, value: string = 'en') {
 	return Cookies.set(title, value, { expires: 365 });
 }
+export function setBlockTime(timeLeft: number = 0) {
+	return Cookies.set('block_time', timeLeft.toString(), {
+		expires: 1 / (24 * timeLeft),
+	});
+}

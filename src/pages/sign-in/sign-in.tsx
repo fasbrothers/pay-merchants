@@ -21,7 +21,6 @@ export default function SignIn() {
 
 		navigate('/cabinet');
 		dispatch(accessToken(data.token));
-		return data;
 	};
 
 	const { mutate, isLoading } = useMutation({

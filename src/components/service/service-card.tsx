@@ -36,7 +36,7 @@ export const ServiceCard = ({ service }: { service: Service }) => {
 						className='w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-contain rounded-full'
 					/>
 				)}
-				<p className='mt-2'>
+				<p className='mt-2 text-center'>
 					{service.is_active ? (
 						<span className='text-green-400 font-medium'>
 							{t('services.status.1.title')}

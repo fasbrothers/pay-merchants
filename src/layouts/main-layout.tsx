@@ -32,7 +32,7 @@ export default function MainLayout() {
 			<SidebarInMain
 				showNavbar={showNavbar}
 				setShowNavbar={setShowNavbar}
-				title={title}
+				title={title.toLowerCase()}
 				balance={profile?.balance || ''}
 			/>
 			<div

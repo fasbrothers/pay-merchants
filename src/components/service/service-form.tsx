@@ -146,7 +146,7 @@ export const ServiceForm = ({
 							))}
 						</Select>
 					</Form.Item>
-					<CheckBox title={t('services.status.1.code')} name='isActive' />
+					<CheckBox title={t('services.status.1.title')} name='isActive' />
 					<Form.Item>
 						<ButtonPrimary isLoading={loading} title={buttonText} />
 					</Form.Item>

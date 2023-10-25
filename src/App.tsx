@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AxiosError } from 'axios';
 import toastMessage from './utils/toast-message';
 import { ErrorResponse } from './@types/error.types';
+import { setBlockTime } from './utils/cookies';
 
 function App() {
 	const queryClient = new QueryClient({
@@ -28,6 +29,10 @@ function App() {
 				toastMessage(
 					axiosError?.response?.data.message || axiosError?.message || 'Error'
 				);
+
+				if (axiosError?.response?.data.type === 'USER_BLOCKED') {
+					setBlockTime(axiosError?.response?.data?.info?.timeLeft);
+				}
 			},
 		}),
 	});

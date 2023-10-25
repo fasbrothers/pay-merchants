@@ -69,7 +69,7 @@
 	],
 	"services": {
 		"quantity_text": "Общее количество услуг",
-		"button_add": "Create a service",
+		"button_add": "Создать услугу",
 		"status": [
 			{
 				"id": 1,

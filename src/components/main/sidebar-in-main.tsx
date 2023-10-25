@@ -55,7 +55,7 @@ export const SidebarInMain = ({
 								to={item.url}
 								key={item.id}
 								className={`flex items-center  py-5 cursor-pointer hover:text-blue-900 duration-300 hover:border-r-2 ${
-									title === item.title ? highlightedStyle : 'text-gray-500'
+									title === item.name ? highlightedStyle : 'text-gray-500'
 								} hover:border-blue-600`}
 							>
 								{item.icon === 'pie' && <PieChartOutlineRoundedIcon />}
@@ -89,7 +89,7 @@ export const SidebarInMain = ({
 				<div
 					key={item.id}
 					className={`cursor-pointer hover:text-blue-900 duration-300 ${
-						title === 'Profile Settings' ? highlightedStyle : 'text-gray-500 '
+						title === item.name ? highlightedStyle : 'text-gray-500 '
 					}`}
 				>
 					<Link to={item.url} className='flex items-center h-[8vh]'>

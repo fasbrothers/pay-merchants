@@ -24,7 +24,7 @@ const routes: RouteObject[] = [
 				element: <Navigate to='cabinet' />,
 			},
 			{
-				path: '/auth',
+				path: 'auth',
 				element: <SignInUpLayout />,
 				children: [
 					{
@@ -41,7 +41,7 @@ const routes: RouteObject[] = [
 				],
 			},
 			{
-				path: '/cabinet',
+				path: 'cabinet',
 				element: <MainLayout />,
 				children: [
 					{
