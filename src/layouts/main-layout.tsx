@@ -1,18 +1,24 @@
-import { Outlet } from 'react-router-dom';
-import { Suspense, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Suspense, useState, useMemo } from 'react';
 import { LoadingLazy } from '../components/shared/loading-lazy';
 import { setLanguage } from '../utils/cookies';
 import { useDataFetching } from '../hooks/useDataFetching';
 import { ProfileResponse } from '../@types/profile.types';
 import { FooterMain, HeaderMain, SidebarInMain } from '../components/main';
-import useGetPathName from '../hooks/useGetPathName';
 
 export default function MainLayout() {
 	const [showNavbar, setShowNavbar] = useState<boolean>(false);
-	const title = useGetPathName({ num: 2 })
-		?.split('-')
-		?.map(el => el[0].toUpperCase() + el.slice(1))
-		.join(' ');
+	const { pathname } = useLocation();
+
+	const title = useMemo(
+		() =>
+			pathname
+				.split('/')[2]
+				?.split('-')
+				?.map(el => el[0].toUpperCase() + el.slice(1))
+				.join(' '),
+		[pathname]
+	);
 
 	const { data: profile, isLoading } = useDataFetching<ProfileResponse>(
 		'profile',
@@ -20,7 +26,7 @@ export default function MainLayout() {
 	);
 
 	!isLoading && setLanguage('language', profile?.lang as string);
-	
+
 	return (
 		<div className='w-full flex min-h-screen'>
 			<SidebarInMain

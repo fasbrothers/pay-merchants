@@ -1,0 +1,109 @@
+{
+	"navigation": [
+		{
+			"id": 1,
+			"title": "Dashboard",
+			"icon": "pie",
+			"url": "/cabinet/dashboard",
+			"name": "dashboard"
+		},
+		{
+			"id": 2,
+			"title": "Services",
+			"icon": "services",
+			"url": "/cabinet/services",
+			"name": "services"
+		},
+		{
+			"id": 3,
+			"title": "Cards",
+			"icon": "credit",
+			"url": "/cabinet/cards",
+			"name": "cards"
+		},
+		{
+			"id": 6,
+			"title": "Profile Settings",
+			"icon": "settings",
+			"url": "/cabinet/profile-settings",
+			"name": "profile settings"
+		}
+	],
+	"navigation_name": ["Navigation", "Balance"],
+	"main": {
+		"profile": "Profile",
+		"logout": "Logout"
+	},
+	"profile_settings": {
+		"information": "Account Information",
+		"name": "Organization name",
+		"email": "Email",
+		"status": "Status",
+		"active": "Active",
+		"update_button": "Update Settings"
+	},
+	"modal_profile_update": {
+		"title": "Update Merchant Profile",
+		"name": "Organization Name",
+		"name_error": "Please input your name!",
+		"name_error_length": "Organization name must be minimum 2 characters",
+		"button": "Update"
+	},
+	"footer_links": [
+		{
+			"id": 1,
+			"title": "Privacy Police"
+		},
+		{
+			"id": 2,
+			"title": "Licence"
+		},
+		{
+			"id": 3,
+			"title": "API"
+		},
+		{
+			"id": 4,
+			"title": "Help Center"
+		}
+	],
+	"services": {
+		"quantity_text": "Total number of services",
+		"button_add": "Create a service",
+		"status": [
+			{
+				"id": 1,
+				"title": "All Services",
+				"code": "All Services"
+			},
+			{
+				"id": 2,
+				"title": "Active",
+				"code": "Active"
+			},
+			{
+				"id": 3,
+				"title": "Not Active",
+				"code": "Not Active"
+			}
+		],
+		"title": "Services",
+		"delete_title": "Delete service",
+		"delete_text": "Are you sure you want to delete this service?",
+		"edit_title": "Edit service",
+		"add_title": "Add service",
+		"add_button": "Create service",
+		"single_title": "Service",
+		"edit_button": "Update service",
+		"download_text": "Download",
+		"delete_image": "Delete a image",
+		"service_name": "Service name",
+		"name_error": "Please input your service name!",
+		"name_error_length": "Service name must be minimum 2 letters",
+		"price_name": "Service price",
+		"price_error": "Please input your service price!",
+		"price_error_for_valid": "Must be a valid number",
+		"category_name": "Select a category",
+		"category_name_error": "Please select a category!"
+	}
+}

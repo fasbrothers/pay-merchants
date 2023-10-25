@@ -9,9 +9,9 @@ export function removeFromCookie(item: string) {
 }
 
 export function setToken(token: string) {
-	Cookies.set('token', token, { expires: 1 / 24 });
+	Cookies.set('token', token, { expires: 1 / 2 });
 }
 
-export function setLanguage(title: string, value: string) {
+export function setLanguage(title: string, value: string = 'en') {
 	return Cookies.set(title, value, { expires: 365 });
 }

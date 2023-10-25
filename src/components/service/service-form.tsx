@@ -11,6 +11,7 @@ import {
 	ServiceInputValues,
 } from '../../@types/service.types';
 import { BackToPreviousPage } from '../shared';
+import { useTranslation } from 'react-i18next';
 
 export const ServiceForm = ({
 	loading,
@@ -23,6 +24,7 @@ export const ServiceForm = ({
 }: ServiceFormProps) => {
 	const [form] = Form.useForm();
 	const [image, setImage] = useState(false);
+	const { t } = useTranslation();
 
 	const { isLoading, data: category } = useDataFetching<Categories>(
 		'categories',
@@ -83,22 +85,22 @@ export const ServiceForm = ({
 						</Upload>
 					</Form.Item>
 					{deleteImage && service?.image_url && (
-						<CheckBox title='Delete a image' name='deleteImage' />
+						<CheckBox title={t('services.delete_image')} name='deleteImage' />
 					)}
 					<Form.Item
 						name='name'
-						label='Name'
+						label={t('services.service_name')}
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
 						rules={[
 							{
 								required: true,
-								message: 'Please input your name!',
+								message: t('services.name_error'),
 								whitespace: true,
 							},
 							{
 								min: 2,
-								message: 'Please enter minimum to 2 letters',
+								message: t('services.name_error_length'),
 							},
 						]}
 					>
@@ -106,14 +108,14 @@ export const ServiceForm = ({
 					</Form.Item>
 					<Form.Item
 						name='price'
-						label='Price'
+						label={t('services.price_name')}
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
 						rules={[
-							{ required: true, message: 'Please input your price!' },
+							{ required: true, message: t('services.price_error') },
 							{
 								pattern: /^[1-9]\d*$/,
-								message: 'Must be a valid price',
+								message: t('services.price_error_for_valid'),
 							},
 						]}
 					>
@@ -124,14 +126,19 @@ export const ServiceForm = ({
 						/>
 					</Form.Item>
 					<Form.Item
-						label='Select'
+						label={t('services.category_name')}
 						name='categoryId'
 						className='categoryId'
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
-						rules={[{ required: true, message: 'Please select a category!' }]}
+						rules={[
+							{ required: true, message: t('services.category_name_error') },
+						]}
 					>
-						<Select loading={isLoading} placeholder='Select a category'>
+						<Select
+							loading={isLoading}
+							placeholder={t('services.category_name')}
+						>
 							{category?.categories.map(item => (
 								<Select.Option key={item.id} value={item.id}>
 									{item.name}
@@ -139,7 +146,7 @@ export const ServiceForm = ({
 							))}
 						</Select>
 					</Form.Item>
-					<CheckBox title='Active' name='isActive' />
+					<CheckBox title={t('services.status.1.code')} name='isActive' />
 					<Form.Item>
 						<ButtonPrimary isLoading={loading} title={buttonText} />
 					</Form.Item>

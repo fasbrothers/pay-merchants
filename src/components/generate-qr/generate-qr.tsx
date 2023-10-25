@@ -1,8 +1,10 @@
 import { QRCode } from 'antd';
 import { ButtonPrimary } from '../shared/button';
 import { GenerateQrProps } from '../../@types/qr.types';
+import { useTranslation } from 'react-i18next';
 
 export const GenerateQr = ({ url, name }: GenerateQrProps) => {
+	const { t } = useTranslation();
 	const downloadQRCode = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const canvas = document
@@ -22,7 +24,7 @@ export const GenerateQr = ({ url, name }: GenerateQrProps) => {
 		<div id='myqrcode'>
 			<QRCode value={url} bgColor='#fff' style={{ marginBottom: 16 }} />
 			<form onSubmit={e => downloadQRCode(e)} className='mt-6'>
-				<ButtonPrimary title='Download' />
+				<ButtonPrimary title={t('services.download_text')} />
 			</form>
 		</div>
 	);

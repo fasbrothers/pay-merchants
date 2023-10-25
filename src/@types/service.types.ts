@@ -49,3 +49,9 @@ export interface DeleteServiceProps {
 	modalTitle: string;
 	modalMessage: string;
 }
+
+export interface Status {
+	id: number;
+	title: string;
+	code: string;
+}

@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toastSuccessMessage } from '../../utils/toast-message';
 import { httpClient } from '../../api';
 import { ModelFormProps } from '../../@types/profile.types';
+import { useTranslation } from 'react-i18next';
 
 export const ModelForm = ({
 	setIsModalOpen,
@@ -13,6 +14,7 @@ export const ModelForm = ({
 }: ModelFormProps) => {
 	const [form] = Form.useForm();
 	const queryClient = useQueryClient();
+	const { t } = useTranslation();
 
 	const handleCancel = () => {
 		setIsModalOpen(false);
@@ -36,7 +38,7 @@ export const ModelForm = ({
 
 	return (
 		<Modal
-			title='Update User Profile'
+			title={t('modal_profile_update.title')}
 			open={isModalOpen}
 			onCancel={handleCancel}
 			className='profile__modal'
@@ -53,25 +55,28 @@ export const ModelForm = ({
 			>
 				<Form.Item
 					name='name'
-					label='Name'
+					label={t('modal_profile_update.name')}
 					labelCol={{ span: 24 }}
 					wrapperCol={{ span: 24 }}
 					rules={[
 						{
 							required: true,
-							message: 'Please input your name!',
+							message: t('modal_profile_update.name_error'),
 							whitespace: true,
 						},
 						{
 							min: 2,
-							message: 'Name must be minimum 2 characters',
+							message: t('modal_profile_update.name_error_length'),
 						},
 					]}
 				>
 					<Input className='input__style' value={profile?.name} name='name' />
 				</Form.Item>
 				<Form.Item>
-					<ButtonPrimary isLoading={isLoading} title='Update' />
+					<ButtonPrimary
+						isLoading={isLoading}
+						title={t('modal_profile_update.button')}
+					/>
 				</Form.Item>
 			</Form>
 		</Modal>

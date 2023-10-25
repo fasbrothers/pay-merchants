@@ -6,11 +6,13 @@ import useGetPathName from '../../hooks/useGetPathName';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { Service, ServiceInputValues } from '../../@types/service.types';
 import { ServiceForm } from '../../components/service';
+import { useTranslation } from 'react-i18next';
 
 function EditService() {
 	const navigate = useNavigate();
 	const query = useQueryClient();
 	const id = useGetPathName({ num: 3 });
+	const { t } = useTranslation();
 
 	const { isLoading: loadService, data: service } = useDataFetching<Service>(
 		'serviceById',
@@ -43,8 +45,8 @@ function EditService() {
 		<ServiceForm
 			loading={loading}
 			mutate={mutate}
-			title='Service'
-			buttonText='Update service'
+			title={t('services.single_title')}
+			buttonText={t('services.edit_button')}
 			service={service}
 			loadService={loadService}
 			deleteImage={true}

@@ -1,8 +1,10 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { currencyFormat } from '../../utils/currencyFormat';
 import { Service } from '../../@types/service.types';
+import { useTranslation } from 'react-i18next';
 
 export const ServiceCard = ({ service }: { service: Service }) => {
+	const { t } = useTranslation();
 	return (
 		<>
 			<div className='w-2/3 flex flex-col justify-between pt-5 pr-2'>
@@ -36,9 +38,13 @@ export const ServiceCard = ({ service }: { service: Service }) => {
 				)}
 				<p className='mt-2'>
 					{service.is_active ? (
-						<span className='text-green-400 font-medium'>Active</span>
+						<span className='text-green-400 font-medium'>
+							{t('services.status.1.title')}
+						</span>
 					) : (
-						<span className='text-red-400 font-medium'>Not Active</span>
+						<span className='text-red-400 font-medium'>
+							{t('services.status.2.title')}
+						</span>
 					)}
 				</p>
 			</div>

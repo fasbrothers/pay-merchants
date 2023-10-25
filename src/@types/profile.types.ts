@@ -18,3 +18,23 @@ export interface HeaderProps {
 	showNavbar: boolean;
 	title?: string;
 }
+
+export interface FooterLinks {
+	id: number;
+	title: string;
+}
+
+export interface Navigation {
+	id: number;
+	title: string;
+	icon: string;
+	url: string;
+	name: string;
+}
+
+export interface SidebarInMainProps {
+	showNavbar: boolean;
+	title: string;
+	setShowNavbar: (showNavbar: boolean) => void;
+	balance: string;
+}

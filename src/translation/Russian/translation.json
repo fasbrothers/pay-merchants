@@ -1,0 +1,109 @@
+{
+	"navigation": [
+		{
+			"id": 1,
+			"title": "Панель управления",
+			"icon": "pie",
+			"url": "/cabinet/dashboard",
+			"name": "dashboard"
+		},
+		{
+			"id": 2,
+			"title": "Услуги",
+			"icon": "services",
+			"url": "/cabinet/services",
+			"name": "services"
+		},
+		{
+			"id": 3,
+			"title": "Карты",
+			"icon": "credit",
+			"url": "/cabinet/cards",
+			"name": "cards"
+		},
+		{
+			"id": 6,
+			"title": "Настройки профиля",
+			"icon": "settings",
+			"url": "/cabinet/profile-settings",
+			"name": "profile settings"
+		}
+	],
+	"navigation_name": ["Навигация", "Баланс"],
+	"main": {
+		"profile": "Профиль",
+		"logout": "Выйти"
+	},
+	"profile_settings": {
+		"information": "Информация профиля",
+		"name": "Название организации",
+		"email": "Электронная почта",
+		"status": "Статус",
+		"active": "Активный",
+		"update_button": "Обновить настройки"
+	},
+	"modal_profile_update": {
+		"title": "Обновить профиль продавца",
+		"name": "Название организации",
+		"name_error": "Пожалуйста, введите свое название организации!",
+		"name_error_length": "Название организации должно состоять минимум из 2 символов",
+		"button": "Обновлять"
+	},
+	"footer_links": [
+		{
+			"id": 1,
+			"title": "Полиция конфиденциальности"
+		},
+		{
+			"id": 2,
+			"title": "Лицензия"
+		},
+		{
+			"id": 3,
+			"title": "API"
+		},
+		{
+			"id": 4,
+			"title": "Центр поддержки"
+		}
+	],
+	"services": {
+		"quantity_text": "Общее количество услуг",
+		"button_add": "Create a service",
+		"status": [
+			{
+				"id": 1,
+				"title": "Все услуги",
+				"code": "All Services"
+			},
+			{
+				"id": 2,
+				"title": "Активный",
+				"code": "Active"
+			},
+			{
+				"id": 3,
+				"title": "Не активен",
+				"code": "Not Active"
+			}
+		],
+		"title": "Сервисы",
+		"delete_title": "Удалить сервис",
+		"delete_text": "Вы уверены, что хотите удалить эту услугу?",
+		"edit_title": "Изменить сервис",
+		"add_title": "Добавить сервис",
+		"add_button": "Создать сервис",
+		"single_title": "Сервис",
+		"edit_button": "Обновить сервис",
+		"download_text": "Скачать",
+		"delete_image": "Удалить фото",
+		"service_name": "Имя услуги",
+		"name_error": "Пожалуйста, введите название вашей услуги!",
+		"name_error_length": "Название службы должно состоять минимум из 2 букв",
+		"price_name": "Цена услуг",
+		"price_error": "Пожалуйста, укажите стоимость услуги!",
+		"price_error_for_valid": "Должен быть действительным номером",
+		"category_name": "Выберите категорию",
+		"category_name_error": "Пожалуйста, выберите категорию!"
+	}
+}

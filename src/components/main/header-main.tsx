@@ -8,7 +8,9 @@ import { deleteToken } from '../../store/slices/authSlice';
 import logo from '../../assets/logo.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useQueryClient } from '@tanstack/react-query';
-import { HeaderProps } from '../../@types/profile.types';
+import { HeaderProps, Navigation } from '../../@types/profile.types';
+import { useTranslation } from 'react-i18next';
+import { Fragment } from 'react';
 
 export const HeaderMain = ({
 	setShowNavbar,
@@ -18,21 +20,25 @@ export const HeaderMain = ({
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const queryClient = useQueryClient();
+	const { t } = useTranslation();
 
 	const handleLogout = () => {
 		dispatch(deleteToken());
 		queryClient.removeQueries();
 		navigate('/auth/login');
 	};
+	const nav: Navigation[] = t('navigation', {
+		returnObjects: true,
+	}) as Navigation[];
 
 	const items: MenuProps['items'] = [
 		{
 			key: '1',
-			label: <Link to='/cabinet/profile-settings'>Profile</Link>,
+			label: <Link to='/cabinet/profile-settings'>{t('main.profile')}</Link>,
 		},
 		{
 			key: '2',
-			label: <button onClick={() => handleLogout()}>Logout</button>,
+			label: <button onClick={() => handleLogout()}>{t('main.logout')}</button>,
 		},
 	];
 
@@ -43,7 +49,13 @@ export const HeaderMain = ({
 					<img src={logo} alt='logo' className='w-4/5 h-4/5' />
 				</Link>
 			</div>
-			<h4 className='text-xl font-extrabold'>{title}</h4>
+			<h4 className='text-xl font-extrabold'>
+				{nav
+					.filter(el => (el.name === title?.toLowerCase() ? el.title : ''))
+					.map(el => (
+						<Fragment key={el.name}>{el.title}</Fragment>
+					))}
+			</h4>
 			<div className='flex items-center'>
 				<Dropdown menu={{ items }} placement='bottom'>
 					<Button className='flex items-center border-none shadow-none'>

@@ -7,10 +7,11 @@ import { GenerateQr } from '../../components/generate-qr';
 import { Service } from '../../@types/service.types';
 import { BackToPreviousPage, ButtonPrimary } from '../../components/shared';
 import { DeleteService, ServiceCard } from '../../components/service';
+import { useTranslation } from 'react-i18next';
 
 function SingleService() {
 	const id = useGetPathName({ num: 3 });
-
+	const { t } = useTranslation();
 	const { isLoading, data: service } = useDataFetching<Service>(
 		'serviceById',
 		`/service/${id}`,
@@ -32,7 +33,7 @@ function SingleService() {
 	return (
 		<div>
 			<div className='my-10'>
-				<BackToPreviousPage title='Service Details' />
+				<BackToPreviousPage title={t('services.title')} />
 				{isLoading ? (
 					<Skeleton active paragraph={{ rows: 4 }} className='w-2/3' />
 				) : (
@@ -46,10 +47,10 @@ function SingleService() {
 										</div>
 										<div className='flex justify-around '>
 											<Link to='edit'>
-												<ButtonPrimary title={'Edit service'} />
+												<ButtonPrimary title={t('services.edit_title')} />
 											</Link>
 											<form onSubmit={showModal}>
-												<ButtonPrimary title={'Delete service'} />
+												<ButtonPrimary title={t('services.delete_title')} />
 											</form>
 										</div>
 									</div>
@@ -60,8 +61,8 @@ function SingleService() {
 										handleCancel={handleCancel}
 										url='/service'
 										navigateUrl='/cabinet/services'
-										modalTitle='Delete service'
-										modalMessage='Do you really want to delete this service?'
+										modalTitle={t('services.delete_title')}
+										modalMessage={t('services.delete_text')}
 									/>
 								</div>
 								<GenerateQr

@@ -4,10 +4,12 @@ import { toastSuccessMessage } from '../../utils/toast-message';
 import { useNavigate } from 'react-router-dom';
 import { ServiceInputValues } from '../../@types/service.types';
 import { ServiceForm } from '../../components/service';
+import { useTranslation } from 'react-i18next';
 
 function AddService() {
 	const navigate = useNavigate();
 	const query = useQueryClient();
+	const { t } = useTranslation();
 
 	const { isLoading: loading, mutate } = useMutation(
 		async (values: ServiceInputValues) => {
@@ -34,8 +36,8 @@ function AddService() {
 		<ServiceForm
 			loading={loading}
 			mutate={mutate}
-			title='Add Service'
-			buttonText='Create service'
+			title={t('services.add_title')}
+			buttonText={t('services.add_button')}
 		/>
 	);
 }

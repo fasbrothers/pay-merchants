@@ -4,14 +4,20 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { AddTitle } from '../../components/shared';
 import { ServiceCard } from '../../components/service';
-import { ResponseServices, Service } from '../../@types/service.types';
+import { ResponseServices, Service, Status } from '../../@types/service.types';
+import { useTranslation } from 'react-i18next';
 
 export default function Services() {
 	const { isLoading, data } = useDataFetching<ResponseServices>(
 		'services',
 		'/service/merchant'
 	);
-	const [activeStatus, setActiveStatus] = useState<string>(status[0].title);
+	const { t } = useTranslation();
+	const status: Status[] = t('services.status', {
+		returnObjects: true,
+	}) as Status[];
+
+	const [activeStatus, setActiveStatus] = useState<string>(status[0].code);
 
 	const style =
 		'w-full sm:w-[48%] md:w-full lg:w-[48%] 2xl:w-[32%] border border-gray-200 flex p-4 rounded-xl hover:shadow-xl transition duration-300';
@@ -20,23 +26,25 @@ export default function Services() {
 		<div>
 			<div className='flex flex-wrap gap-3 justify-between mt-4'>
 				<h4 className='text-lg'>
-					Total number of services:{' '}
-					<span className='font-bold'>{data?.count ? data?.count : '0'}</span>
+					{t('services.quantity_text')}:
+					<span className='font-bold'> {data?.count ? data?.count : '0'}</span>
 				</h4>
 				<div>
-					<AddTitle url='add-service' title='Create a service' weight='200' />
+					<AddTitle
+						url='add-service'
+						title={t('services.button_add')}
+						weight='200'
+					/>
 				</div>
 			</div>
 			{data?.count && data?.count > 0 ? (
-				<div className='h-16 bg-gray-100 rounded-2xl flex justify around items-center w-[300px] p-2 gap-x-2 mt-5'>
+				<div className='h-16 bg-gray-100 rounded-2xl flex justify-around items-center w-[340px] p-2 gap-x-2 mt-5'>
 					{status.map(el => (
 						<div
 							key={el.id}
-							onClick={() => setActiveStatus(el.title)}
+							onClick={() => setActiveStatus(el.code)}
 							className={` rounded-[12px] hover:bg-black duration-200 hover:text-white cursor-pointer py-3 px-2 ${
-								activeStatus === el.title
-									? 'bg-black text-white'
-									: 'bg-gray-100'
+								activeStatus === el.code ? 'bg-black text-white' : 'bg-gray-100'
 							}`}
 						>
 							{el.title}
@@ -83,18 +91,3 @@ function filterServices(services: Service[], activeStatus: string): Service[] {
 	}
 	return services;
 }
-
-const status = [
-	{
-		id: 1,
-		title: 'All Services',
-	},
-	{
-		id: 2,
-		title: 'Active',
-	},
-	{
-		id: 3,
-		title: 'Not Active',
-	},
-];

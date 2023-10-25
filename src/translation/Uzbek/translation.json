@@ -1,0 +1,109 @@
+{
+	"navigation": [
+		{
+			"id": 1,
+			"title": "Boshqaruv paneli",
+			"icon": "pie",
+			"url": "/cabinet/dashboard",
+			"name": "dashboard"
+		},
+		{
+			"id": 2,
+			"title": "Xizmatlar",
+			"icon": "services",
+			"url": "/cabinet/services",
+			"name": "services"
+		},
+		{
+			"id": 3,
+			"title": "Kartalar",
+			"icon": "credit",
+			"url": "/cabinet/cards",
+			"name": "cards"
+		},
+		{
+			"id": 6,
+			"title": "Profil sozlamalari",
+			"icon": "settings",
+			"url": "/cabinet/profile-settings",
+			"name": "profile settings"
+		}
+	],
+	"navigation_name": ["Navigatsiya", "Balans"],
+	"main": {
+		"profile": "Profil",
+		"logout": "Chiqish"
+	},
+	"profile_settings": {
+		"information": "Profil haqida ma'lumot",
+		"name": "Tashkilot nomi",
+		"email": "Elektron pochta",
+		"status": "Holat",
+		"active": "Faol",
+		"update_button": "Sozlamalarni yangilash"
+	},
+	"modal_profile_update": {
+		"title": "Foydalanuvchi profilini yangilash",
+		"name": "Tashkilot nomi",
+		"name_error": "Iltimos, tashkilot nomini kiriting!",
+		"name_error_length": "Tashkilot nomi kamida 2 ta belgidan iborat boʻlishi kerak",
+		"button": "Yangilash"
+	},
+	"footer_links": [
+		{
+			"id": 1,
+			"title": "Maxfiylik siyosati"
+		},
+		{
+			"id": 2,
+			"title": "Litsenziya"
+		},
+		{
+			"id": 3,
+			"title": "API"
+		},
+		{
+			"id": 4,
+			"title": "Yordam markazi"
+		}
+	],
+	"services": {
+		"quantity_text": "Xizmatlarning umumiy soni",
+		"button_add": "Xizmat yaratish",
+		"status": [
+			{
+				"id": 1,
+				"title": "Barcha xizmatlar",
+				"code": "All Services"
+			},
+			{
+				"id": 2,
+				"title": "Faol",
+				"code": "Active"
+			},
+			{
+				"id": 3,
+				"title": "Faol emas",
+				"code": "Not Active"
+			}
+		],
+		"title": "Xizmatlar",
+		"delete_title": "Xizmatni o'chirish",
+		"delete_text": "Haqiqatan ham bu xizmatni oʻchirib tashlamoqchimisiz?",
+		"edit_title": "Xizmatni tahrirlash",
+		"add_title": "Xizmat qo'shish",
+		"add_button": "Xizmat yaratish",
+		"single_title": "Yagona xizmat",
+		"edit_button": "Xizmatni yangilash",
+		"download_text": "Yuklab olish",
+		"delete_image": "Rasmni o'chirish",
+		"service_name": "Xizmat nomi",
+		"name_error": "Iltimos, xizmat nomini kiriting!",
+		"name_error_length": "Xizmat nomi kamida 2 harfdan iborat bo'lishi kerak",
+		"price_name": "Xizmat narxi",
+		"price_error": "Iltimos, xizmat narxini kiriting!",
+		"price_error_for_valid": "Yaroqli raqam boʻlishi kerak",
+		"category_name": "Kategoriyani tanlang",
+		"category_name_error": "Iltimos, kategoriyani tanlang!"
+	}
+}
