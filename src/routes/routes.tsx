@@ -24,25 +24,9 @@ const routes: RouteObject[] = [
 				element: <Navigate to='cabinet' />,
 			},
 			{
-				path: 'auth',
-				element: <SignInUpLayout />,
-				children: [
-					{
-						index: true,
-						element: <Navigate to='login' />,
-					},
-					{
-						children: [
-							{ path: 'login', element: <SignIn /> },
-							{ path: 'register', element: <SignUp /> },
-							{ path: '*', element: <SignIn /> },
-						],
-					},
-				],
-			},
-			{
 				path: 'cabinet',
 				element: <MainLayout />,
+				errorElement: <Navigate to='/auth/login' />,
 				children: [
 					{
 						index: true,
@@ -51,7 +35,6 @@ const routes: RouteObject[] = [
 					{
 						children: [
 							{ path: 'dashboard', element: <Main /> },
-							{ path: '*', element: <NotFound /> },
 							{ path: 'profile-settings', element: <ProfileSettings /> },
 							{
 								path: 'services',
@@ -78,6 +61,24 @@ const routes: RouteObject[] = [
 					},
 				],
 			},
+			{
+				path: 'auth',
+				element: <SignInUpLayout />,
+				children: [
+					{
+						index: true,
+						element: <Navigate to='login' />,
+					},
+					{
+						children: [
+							{ path: 'login', element: <SignIn /> },
+							{ path: 'register', element: <SignUp /> },
+							{ path: '*', element: <SignIn /> },
+						],
+					},
+				],
+			},
+			{ path: '*', element: <NotFound /> },
 		],
 	},
 ];

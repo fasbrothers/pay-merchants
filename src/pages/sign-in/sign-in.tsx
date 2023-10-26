@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthResponse, InputValues } from '../../@types/auth.types';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { accessToken } from '../../store/slices/authSlice';
@@ -9,7 +9,6 @@ import { AuthImageTitle, SignInForm } from '../../components/auth';
 
 export default function SignIn() {
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 
 	const handleSubmit = async (values: InputValues) => {
 		const { password, email } = values;
@@ -19,7 +18,6 @@ export default function SignIn() {
 			email,
 		});
 
-		navigate('/cabinet');
 		dispatch(accessToken(data.token));
 	};
 
