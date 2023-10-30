@@ -9,11 +9,11 @@ export function removeFromCookie(item: string) {
 }
 
 export function setToken(token: string) {
-	Cookies.set('token', token, { expires: 1 / 2 });
+	Cookies.set('token', token);
 }
 
 export function setLanguage(title: string, value: string = 'en') {
-	return Cookies.set(title, value, { expires: 365 });
+	return Cookies.set(title, value);
 }
 export function setBlockTime(timeLeft: number = 0) {
 	return Cookies.set('block_time', timeLeft.toString(), {

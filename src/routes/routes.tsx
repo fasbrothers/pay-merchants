@@ -21,16 +21,15 @@ const routes: RouteObject[] = [
 		children: [
 			{
 				index: true,
-				element: <Navigate to='cabinet' />,
+				element: <Navigate to='cabinet/services' />,
 			},
 			{
 				path: 'cabinet',
 				element: <MainLayout />,
-				errorElement: <Navigate to='/auth/login' />,
 				children: [
 					{
 						index: true,
-						element: <Navigate to='services' />,
+						element: <Navigate to='cabinet/services' />,
 					},
 					{
 						children: [
