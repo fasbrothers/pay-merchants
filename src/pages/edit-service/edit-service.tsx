@@ -27,9 +27,14 @@ function EditService() {
 			values.deleteImage && formData.append('deleteImage', 'true');
 			formData.append('isActive', values.isActive.toString());
 			formData.append('name', values.name);
-			formData.append('price', values.price);
 			formData.append('categoryId', values.categoryId.toString());
 			formData.append('id', id.toString());
+			values.fields !== undefined
+				? formData.append('fields', JSON.stringify(values.fields))
+				: formData.append('fields', JSON.stringify([]));
+
+			values.deletedFields &&
+				formData.append('deletedFields', JSON.stringify(values.deletedFields));
 
 			const { data } = await httpClient.put('/service', formData);
 			data.message ? toastSuccessMessage(data.message) : null;

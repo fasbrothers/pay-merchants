@@ -13,17 +13,21 @@ function AddService() {
 
 	const { isLoading: loading, mutate } = useMutation(
 		async (values: ServiceInputValues) => {
+			console.log(values);
 			const formData = new FormData();
 			values.image && formData.append('image', values.image.file.originFileObj);
 			values.isActive &&
 				formData.append('isActive', values.isActive.toString());
 			formData.append('name', values.name);
-			formData.append('price', values.price);
 			formData.append('categoryId', values.categoryId.toString());
+			values.fields !== undefined
+				? formData.append('fields', JSON.stringify(values.fields))
+				: formData.append('fields', JSON.stringify([]));
 
 			const { data } = await httpClient.post('/service', formData);
 			data.message ? toastSuccessMessage(data.message) : null;
 		},
+
 		{
 			onSuccess: () => {
 				navigate('/cabinet/services');

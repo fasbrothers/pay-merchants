@@ -8,13 +8,22 @@ export interface Service {
 	merchant_id: string;
 	category_id: number;
 	name: string;
-	price: string;
-	image_url?: string;
+	image_url: string;
 	is_active: boolean;
+	public_key: string;
 	category_code: string;
 	category_name: string;
-	public_key: string;
+	fields: Field[];
 }
+
+export interface Field {
+	id: string;
+	name: string;
+	type: string;
+	required: boolean;
+	order: number;
+}
+
 export interface ResponseServices {
 	count: number;
 	services: Service[];
@@ -22,11 +31,12 @@ export interface ResponseServices {
 
 export interface ServiceInputValues {
 	name: string;
-	price: string;
 	categoryId: number;
 	isActive: boolean;
 	image: any;
 	deleteImage: boolean;
+	deletedFields?: string[];
+	fields: { name: string; type: string; id?: string }[];
 }
 
 export interface ServiceFormProps {

@@ -4,7 +4,6 @@ import { CheckBox } from '../shared/checkbox';
 import { ButtonPrimary } from '../shared/button';
 import { useDataFetching } from '../../hooks/useDataFetching';
 import { useState } from 'react';
-import { MaskedInput } from 'antd-mask-input';
 import { Categories } from '../../@types/category.types';
 import {
 	ServiceFormProps,
@@ -12,6 +11,8 @@ import {
 } from '../../@types/service.types';
 import { BackToPreviousPage } from '../shared';
 import { useTranslation } from 'react-i18next';
+import { CloseOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 export const ServiceForm = ({
 	loading,
@@ -25,6 +26,7 @@ export const ServiceForm = ({
 	const [form] = Form.useForm();
 	const [image, setImage] = useState(false);
 	const { t } = useTranslation();
+	const [deletedFields, setDeletedFields] = useState<string[]>([]);
 
 	const { isLoading, data: category } = useDataFetching<Categories>(
 		'categories',
@@ -32,7 +34,7 @@ export const ServiceForm = ({
 	);
 
 	const handleSubmit = (values: ServiceInputValues) => {
-		mutate(values);
+		mutate({ ...values, deletedFields });
 	};
 
 	const style =
@@ -54,9 +56,9 @@ export const ServiceForm = ({
 					className={style}
 					initialValues={{
 						name: service?.name,
-						price: service?.price && Number(service?.price).toFixed(0),
 						categoryId: service?.category_id,
 						isActive: service?.is_active,
+						fields: service?.fields,
 					}}
 				>
 					{!image && service?.image_url && (
@@ -107,25 +109,6 @@ export const ServiceForm = ({
 						<Input name='name' className='input__style' />
 					</Form.Item>
 					<Form.Item
-						name='price'
-						label={t('services.price_name')}
-						labelCol={{ span: 24 }}
-						wrapperCol={{ span: 24 }}
-						rules={[
-							{ required: true, message: t('services.price_error') },
-							{
-								pattern: /^[1-9]\d*$/,
-								message: t('services.price_error_for_valid'),
-							},
-						]}
-					>
-						<MaskedInput
-							maskOptions={{ lazy: true }}
-							mask={'000000000000'}
-							className='input__style'
-						/>
-					</Form.Item>
-					<Form.Item
 						label={t('services.category_name')}
 						name='categoryId'
 						className='categoryId'
@@ -146,6 +129,60 @@ export const ServiceForm = ({
 							))}
 						</Select>
 					</Form.Item>
+
+					<Form.List name={['fields']}>
+						{(subFields, subOpt) => (
+							<div className='flex flex-col w-full '>
+								{subFields.map((subField, index) => (
+									<div
+										key={subField.key}
+										className='flex justify-between items-baseline gap-x-3 mt-4'
+									>
+										<Form.Item
+											name={[subField.name, 'name']}
+											className='grow'
+											shouldUpdate
+										>
+											<Input
+												placeholder='field name'
+												className='input__style'
+											/>
+										</Form.Item>
+										<Form.Item name={[subField.name, 'type']}>
+											<Select
+												placeholder='field type'
+												disabled={
+													form.getFieldValue('fields') &&
+													form.getFieldValue('fields')[index]
+														? true
+														: false
+												}
+											>
+												<Select.Option value='text'>Text</Select.Option>
+												<Select.Option value='number'>Number</Select.Option>
+												<Select.Option value='phone'>Phone</Select.Option>
+											</Select>
+										</Form.Item>
+										<CloseOutlined
+											onClick={() => {
+												const id = form.getFieldValue('fields')[index].id;
+												subOpt.remove(subField.name);
+												id && setDeletedFields(prev => [...prev, id]);
+											}}
+										/>
+									</div>
+								))}
+								<Button
+									type='dashed'
+									onClick={() => subOpt.add()}
+									className='p-4 pb-8 my-4'
+								>
+									+ Add Field
+								</Button>
+							</div>
+						)}
+					</Form.List>
+
 					<CheckBox title={t('services.status.1.title')} name='isActive' />
 					<Form.Item>
 						<ButtonPrimary isLoading={loading} title={buttonText} />

@@ -1,5 +1,4 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { currencyFormat } from '../../utils/currencyFormat';
 import { Service } from '../../@types/service.types';
 import { useTranslation } from 'react-i18next';
 
@@ -11,10 +10,18 @@ export const ServiceCard = ({ service }: { service: Service }) => {
 				<div>
 					<h3 className='font-bold xl:text-lg truncate'>{service.name}</h3>
 					<h5 className='text-sm'>{service.category_name}</h5>
+					<p className='mt-2'>
+						{service.is_active ? (
+							<span className='text-green-400 font-medium'>
+								{t('services.status.1.title')}
+							</span>
+						) : (
+							<span className='text-red-400 font-medium'>
+								{t('services.status.2.title')}
+							</span>
+						)}
+					</p>
 				</div>
-				<p className='font-bold xl:text-lg'>
-					{currencyFormat(+service.price)}sum
-				</p>
 			</div>
 			<div className='w-1/3 flex flex-col items-center'>
 				{service.image_url === null ? (
@@ -36,17 +43,6 @@ export const ServiceCard = ({ service }: { service: Service }) => {
 						className='w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-contain rounded-full'
 					/>
 				)}
-				<p className='mt-2 text-center'>
-					{service.is_active ? (
-						<span className='text-green-400 font-medium'>
-							{t('services.status.1.title')}
-						</span>
-					) : (
-						<span className='text-red-400 font-medium'>
-							{t('services.status.2.title')}
-						</span>
-					)}
-				</p>
 			</div>
 		</>
 	);
