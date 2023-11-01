@@ -22,8 +22,8 @@ export const GenerateQr = ({ url, name }: GenerateQrProps) => {
 	};
 	return (
 		<div id='myqrcode'>
-			<QRCode value={url} bgColor='#fff' style={{ marginBottom: 16 }} />
-			<form onSubmit={e => downloadQRCode(e)} className='mt-6'>
+			<QRCode value={url} bgColor='#fff' />
+			<form onSubmit={e => downloadQRCode(e)} className='mt-4'>
 				<ButtonPrimary title={t('services.download_text')} />
 			</form>
 		</div>

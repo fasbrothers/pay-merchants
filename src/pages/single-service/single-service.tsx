@@ -45,12 +45,15 @@ function SingleService() {
 										<div key={service.id} className={style}>
 											<ServiceCard service={service as Service} />
 										</div>
-										<div className='flex justify-around '>
+										<div className='flex flex-wrap justify-around gap-x-3'>
 											<Link to='edit'>
 												<ButtonPrimary title={t('services.edit_title')} />
 											</Link>
 											<form onSubmit={showModal}>
-												<ButtonPrimary title={t('services.delete_title')} />
+												<ButtonPrimary
+													title={t('services.delete_title')}
+													bgColor='bg-red-500'
+												/>
 											</form>
 										</div>
 									</div>

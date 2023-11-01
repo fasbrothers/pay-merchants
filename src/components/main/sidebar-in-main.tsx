@@ -31,7 +31,7 @@ export const SidebarInMain = ({
 		<div
 			className={`${
 				showNavbar ? 'fixed w-2/3 sm:w-2/5 z-30' : 'hidden'
-			} md:block md:w-2/6 xl:w-1/6 bg-gray-100 pl-4 lg:pl-8 h-screen md:sticky top-0 `}
+			} md:block md:w-2/6 lg:w-[22%] xl:w-1/6 bg-gray-100 pl-4 lg:pl-8 h-screen md:sticky top-0 `}
 		>
 			<div className='h-[12vh]'>
 				<LogoMain />
@@ -53,6 +53,7 @@ export const SidebarInMain = ({
 						{nav.slice(0, -1).map((item: Navigation) => (
 							<Link
 								to={item.url}
+								onClick={() => setShowNavbar(false)}
 								key={item.id}
 								className={`flex items-center  py-5 cursor-pointer hover:text-blue-900 duration-300 hover:border-r-2 ${
 									title === item.name ? highlightedStyle : 'text-gray-500'
@@ -92,7 +93,11 @@ export const SidebarInMain = ({
 						title === item.name ? highlightedStyle : 'text-gray-500 '
 					}`}
 				>
-					<Link to={item.url} className='flex items-center h-[8vh]'>
+					<Link
+						onClick={() => setShowNavbar(false)}
+						to={item.url}
+						className='flex items-center h-[8vh]'
+					>
 						{item.icon === 'settings' && <SettingsOutlinedIcon />}
 						<p className='font-medium ml-4'>{item.title}</p>
 					</Link>
