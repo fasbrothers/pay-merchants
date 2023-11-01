@@ -141,14 +141,28 @@ export const ServiceForm = ({
 										<Form.Item
 											name={[subField.name, 'name']}
 											className='grow'
-											shouldUpdate
+											rules={[
+												{
+													required: true,
+													message: 'Please input field name!',
+												},
+											]}
 										>
 											<Input
 												placeholder='field name'
 												className='input__style'
 											/>
 										</Form.Item>
-										<Form.Item name={[subField.name, 'type']}>
+										<Form.Item
+											name={[subField.name, 'type']}
+											className='categoryId'
+											rules={[
+												{
+													required: true,
+													message: 'Select type!',
+												},
+											]}
+										>
 											<Select
 												placeholder='field type'
 												disabled={
@@ -165,7 +179,9 @@ export const ServiceForm = ({
 										</Form.Item>
 										<CloseOutlined
 											onClick={() => {
-												const id = form.getFieldValue('fields')[index].id;
+												const id =
+													form.getFieldValue('fields')[index] &&
+													form.getFieldValue('fields')[index].id;
 												subOpt.remove(subField.name);
 												id && setDeletedFields(prev => [...prev, id]);
 											}}
