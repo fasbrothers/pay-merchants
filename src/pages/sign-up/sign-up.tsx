@@ -11,14 +11,25 @@ export default function SignUp() {
 	const dispatch = useAppDispatch();
 
 	const handleSubmit = async (values: InputValues) => {
-		const { name, email, password } = values;
-		const { data } = await httpClient.post<AuthResponse>('/merchant/register', {
-			name,
-			email,
-			password,
-		});
+		if (values.otp === undefined) {
+			await httpClient.post('/merchant/sendcode', {
+				email: values.email,
+				resend: values.resend ? true : undefined,
+			});
+		} else {
+			const { name, email, password, otp } = values;
+			const { data } = await httpClient.post<AuthResponse>(
+				'/merchant/register',
+				{
+					name,
+					email,
+					password,
+					otp,
+				}
+			);
 
-		dispatch(accessToken(data.token));
+			dispatch(accessToken(data.token));
+		}
 	};
 
 	const { mutate, isLoading } = useMutation({

@@ -4,10 +4,13 @@ export interface InputValues {
 	image_url?: string;
 	email: string;
 	deletePhoto?: boolean;
+	otp: string | undefined;
+	resend: boolean;
 }
 
 export interface AuthProps {
 	mutate: (values: InputValues) => void;
+	// mutateResend: (values: InputValues) => void;
 	isLoading: boolean;
 }
 

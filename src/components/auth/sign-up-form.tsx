@@ -3,13 +3,38 @@ import EmailIcon from '@mui/icons-material/Email';
 import { Form, Input } from 'antd';
 import { AuthProps, InputValues } from '../../@types/auth.types';
 import { ButtonPrimary } from '../shared/button';
+import { MouseEvent } from 'react';
+import { useState } from 'react';
+import { httpClient } from '../../api';
+import { useMutation } from '@tanstack/react-query';
 
 export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 	const [form] = Form.useForm();
+	const [showOTP, setShowOTP] = useState(false);
+	const showingOtp = showOTP ? 'hidden' : 'block';
 
 	const handleSubmit = (values: InputValues) => {
+		setShowOTP(true);
 		mutate(values);
 	};
+
+	const { mutate: resendOTP } = useMutation({
+		mutationFn: (email: string) => {
+			return httpClient.post('/merchant/sendcode', {
+				email,
+				resend: true,
+			});
+		},
+	});
+
+	const handleResend = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setShowOTP(true);
+		
+		const { email } = form.getFieldsValue(['email']);
+		resendOTP(email);
+	};
+
 	return (
 		<Form
 			form={form}
@@ -17,7 +42,25 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 			onFinish={handleSubmit}
 			scrollToFirstError
 		>
+			{showOTP && (
+				<Form.Item
+					name='otp'
+					label='Verification Code'
+					labelCol={{ span: 24 }}
+					wrapperCol={{ span: 24 }}
+					rules={[
+						{
+							required: true,
+							message: 'Please input your OTP!',
+						},
+					]}
+				>
+					<Input className='input__style' />
+				</Form.Item>
+			)}
+
 			<Form.Item
+				className={showingOtp}
 				name='name'
 				label='Name'
 				labelCol={{ span: 24 }}
@@ -39,6 +82,7 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 			</Form.Item>
 			<Form.Item
 				name='email'
+				className={showingOtp}
 				label='Email'
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
@@ -56,6 +100,7 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 			<Form.Item
 				name='password'
 				label='Password'
+				className={showingOtp}
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
 				rules={[
@@ -73,9 +118,9 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 			>
 				<Input.Password className='input__style' name='password' />
 			</Form.Item>
-
 			<Form.Item
 				name='confirm'
+				className={showingOtp}
 				label='Confirm Password'
 				dependencies={['password']}
 				labelCol={{ span: 24 }}
@@ -100,8 +145,19 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 			>
 				<Input.Password className='input__style' />
 			</Form.Item>
+			{showOTP && (
+				<button
+					onClick={e => handleResend(e)}
+					className='text-blue-700 font-medium mb-2 flex justify-end w-1/10 ml-auto'
+				>
+					Resend
+				</button>
+			)}
 			<Form.Item>
-				<ButtonPrimary isLoading={isLoading} title='Create account' />
+				<ButtonPrimary
+					isLoading={isLoading}
+					title={showOTP ? 'Complete' : 'Verify Email'}
+				/>
 			</Form.Item>
 		</Form>
 	);

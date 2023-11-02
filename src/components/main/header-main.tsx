@@ -26,7 +26,6 @@ export const HeaderMain = ({
 		dispatch(deleteToken());
 		queryClient.removeQueries();
 		navigate('/auth/login');
-		console.log('logout');
 	};
 	const nav: Navigation[] = t('navigation', {
 		returnObjects: true,
