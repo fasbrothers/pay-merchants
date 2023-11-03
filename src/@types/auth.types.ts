@@ -10,8 +10,10 @@ export interface InputValues {
 
 export interface AuthProps {
 	mutate: (values: InputValues) => void;
-	// mutateResend: (values: InputValues) => void;
 	isLoading: boolean;
+	showOTP?: boolean;
+	timeLeft: number;
+	setTimeLeft?: (time: number) => void;
 }
 
 export interface AuthResponse {
@@ -26,4 +28,9 @@ export interface AuthResponse {
 
 export interface AuthState {
 	token: string | undefined;
+}
+
+export interface SendCodeResponse {
+	success: boolean;
+	timeLeft: number;
 }

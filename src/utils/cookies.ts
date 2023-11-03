@@ -11,6 +11,9 @@ export function removeFromCookie(item: string) {
 export function setToken(token: string) {
 	Cookies.set('token', token);
 }
+export function setUID(value: string) {
+	return Cookies.set('uid', value);
+}
 
 export function setLanguage(title: string, value: string = 'en') {
 	return Cookies.set(title, value);

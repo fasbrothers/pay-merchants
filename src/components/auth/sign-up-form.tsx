@@ -1,36 +1,58 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import { Form, Input } from 'antd';
-import { AuthProps, InputValues } from '../../@types/auth.types';
+import {
+	AuthProps,
+	InputValues,
+	SendCodeResponse,
+} from '../../@types/auth.types';
 import { ButtonPrimary } from '../shared/button';
-import { MouseEvent } from 'react';
-import { useState } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { httpClient } from '../../api';
 import { useMutation } from '@tanstack/react-query';
+import useTimer, { TimerState } from '../../hooks/useTimer';
+import { convertSecondsToMinutes } from '../../utils/convertSecondsToMinutes';
 
-export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
+export const SignUpForm = ({
+	mutate,
+	isLoading,
+	showOTP,
+	timeLeft,
+	setTimeLeft,
+}: AuthProps) => {
 	const [form] = Form.useForm();
-	const [showOTP, setShowOTP] = useState(false);
 	const showingOtp = showOTP ? 'hidden' : 'block';
 
+	const { minutes, seconds, setMinutes, setSeconds }: TimerState = useTimer({
+		initialSeconds: timeLeft,
+	});
+
+	useEffect(() => {
+		const { minutes, remainingSeconds } = convertSecondsToMinutes(timeLeft);
+		setMinutes(minutes);
+		setSeconds(remainingSeconds);
+	}, [timeLeft, setMinutes, setSeconds]);
+
 	const handleSubmit = (values: InputValues) => {
-		setShowOTP(true);
 		mutate(values);
 	};
 
 	const { mutate: resendOTP } = useMutation({
-		mutationFn: (email: string) => {
-			return httpClient.post('/merchant/sendcode', {
-				email,
-				resend: true,
-			});
+		mutationFn: async (email: string) => {
+			const { data } = await httpClient.post<SendCodeResponse>(
+				'/merchant/sendcode',
+				{
+					email,
+					resend: true,
+				}
+			);
+
+			setTimeLeft && setTimeLeft(data.timeLeft);
 		},
 	});
 
 	const handleResend = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		setShowOTP(true);
-		
 		const { email } = form.getFieldsValue(['email']);
 		resendOTP(email);
 	};
@@ -146,12 +168,25 @@ export const SignUpForm = ({ mutate, isLoading }: AuthProps) => {
 				<Input.Password className='input__style' />
 			</Form.Item>
 			{showOTP && (
-				<button
-					onClick={e => handleResend(e)}
-					className='text-blue-700 font-medium mb-2 flex justify-end w-1/10 ml-auto'
-				>
-					Resend
-				</button>
+				<div className='flex justify-between text-base'>
+					{seconds > 0 || minutes > 0 ? (
+						<p>
+							Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+							{seconds < 10 ? `0${seconds}` : seconds}
+						</p>
+					) : (
+						<p>Didn't recieve code?</p>
+					)}
+					<button
+						onClick={e => handleResend(e)}
+						disabled={seconds > 0 || minutes > 0}
+						className={`font-medium mb-2 w-1/10 ml-auto ${
+							seconds > 0 || minutes > 0 ? 'text-[#a3a5a7]' : 'text-blue-700'
+						} `}
+					>
+						Resend
+					</button>
+				</div>
 			)}
 			<Form.Item>
 				<ButtonPrimary

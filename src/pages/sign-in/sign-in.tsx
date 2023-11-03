@@ -6,9 +6,13 @@ import { accessToken } from '../../store/slices/authSlice';
 import logo from '../../assets/logo.svg';
 import { httpClient } from '../../api';
 import { AuthImageTitle, SignInForm } from '../../components/auth';
+import { AxiosError } from 'axios';
+import { ErrorResponse } from '../../@types/error.types';
+import { useState } from 'react';
 
 export default function SignIn() {
 	const dispatch = useAppDispatch();
+	const [timeLeft, setTimeLeft] = useState<number>(0);
 
 	const handleSubmit = async (values: InputValues) => {
 		const { password, email } = values;
@@ -23,13 +27,24 @@ export default function SignIn() {
 
 	const { mutate, isLoading } = useMutation({
 		mutationFn: (values: InputValues) => handleSubmit(values),
+		onError: (error: unknown) => {
+			const axiosError = error as AxiosError<ErrorResponse>;
+			if (axiosError?.response?.data.type === 'USER_BLOCKED') {
+				setTimeLeft(axiosError.response.data?.info?.timeLeft);
+			}
+		},
 	});
 
 	return (
 		<div className='w-full md:w-1/2 flex items-center md:h-screen'>
 			<div className='w-11/12 xl:w-7/12 mx-auto mt-5 md:mt-0'>
 				<AuthImageTitle logo={logo} title='Sign In' />
-				<SignInForm mutate={mutate} isLoading={isLoading} />
+				<SignInForm
+					mutate={mutate}
+					isLoading={isLoading}
+					timeLeft={timeLeft}
+					setTimeLeft={setTimeLeft}
+				/>
 				<div className='flex flex-col lg:flex-row'>
 					<p className='mr-2'>You don't have an account?</p>
 					<Link
