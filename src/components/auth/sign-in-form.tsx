@@ -63,8 +63,8 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 					<Input.Password name='password' className='input__style' />
 				</Form.Item>
 				{seconds > 0 || minutes > 0 ? (
-					<p className='mb-3'>
-						Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+					<p className='mb-3 text-base'>
+						Block time : {minutes < 10 ? `0${minutes}` : minutes}:
 						{seconds < 10 ? `0${seconds}` : seconds}
 					</p>
 				) : null}
@@ -72,7 +72,7 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 					<ButtonPrimary
 						disabled={seconds > 0 || minutes > 0}
 						isLoading={isLoading}
-						title='Sign In'
+						title={seconds > 0 || minutes > 0 ? 'Please wait...' : 'Sign In'}
 					/>
 				</Form.Item>
 			</Form>

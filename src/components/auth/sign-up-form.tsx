@@ -12,6 +12,8 @@ import { httpClient } from '../../api';
 import { useMutation } from '@tanstack/react-query';
 import useTimer, { TimerState } from '../../hooks/useTimer';
 import { convertSecondsToMinutes } from '../../utils/convertSecondsToMinutes';
+import { AxiosError } from 'axios';
+import { ErrorResponse } from '../../@types/error.types';
 
 export const SignUpForm = ({
 	mutate,
@@ -31,7 +33,17 @@ export const SignUpForm = ({
 		const { minutes, remainingSeconds } = convertSecondsToMinutes(timeLeft);
 		setMinutes(minutes);
 		setSeconds(remainingSeconds);
-	}, [timeLeft, setMinutes, setSeconds]);
+
+		const timeoutId = setTimeout(() => {
+			if (timeLeft > 0) {
+				setTimeLeft && setTimeLeft(timeLeft - 1);
+			}
+		}, 1000);
+
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [timeLeft, setMinutes, setSeconds, setTimeLeft]);
 
 	const handleSubmit = (values: InputValues) => {
 		mutate(values);
@@ -43,11 +55,16 @@ export const SignUpForm = ({
 				'/merchant/sendcode',
 				{
 					email,
-					resend: true,
 				}
 			);
-
 			setTimeLeft && setTimeLeft(data.timeLeft);
+		},
+		onError: (error: unknown) => {
+			const axiosError = error as AxiosError<ErrorResponse>;
+
+			if (axiosError?.response?.data.type === 'TRY_AGAIN_AFTER') {
+				setTimeLeft && setTimeLeft(axiosError.response.data?.info?.timeLeft);
+			}
 		},
 	});
 

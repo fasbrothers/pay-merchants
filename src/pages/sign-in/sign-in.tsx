@@ -39,12 +39,7 @@ export default function SignIn() {
 		<div className='w-full md:w-1/2 flex items-center md:h-screen'>
 			<div className='w-11/12 xl:w-7/12 mx-auto mt-5 md:mt-0'>
 				<AuthImageTitle logo={logo} title='Sign In' />
-				<SignInForm
-					mutate={mutate}
-					isLoading={isLoading}
-					timeLeft={timeLeft}
-					setTimeLeft={setTimeLeft}
-				/>
+				<SignInForm mutate={mutate} isLoading={isLoading} timeLeft={timeLeft} />
 				<div className='flex flex-col lg:flex-row'>
 					<p className='mr-2'>You don't have an account?</p>
 					<Link

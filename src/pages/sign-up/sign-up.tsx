@@ -27,7 +27,6 @@ export default function SignUp() {
 				'/merchant/sendcode',
 				{
 					email: values.email,
-					resend: values.resend ? true : undefined,
 				}
 			);
 			setTimeLeft(data.timeLeft);
@@ -70,6 +69,7 @@ export default function SignUp() {
 					isLoading={isLoading}
 					showOTP={showOTP}
 					timeLeft={timeLeft}
+					setTimeLeft={setTimeLeft}
 				/>
 				<div className='flex'>
 					<p className='mr-2'>Already registered?</p>
