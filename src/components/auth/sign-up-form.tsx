@@ -14,6 +14,7 @@ import useTimer, { TimerState } from '../../hooks/useTimer';
 import { convertSecondsToMinutes } from '../../utils/convertSecondsToMinutes';
 import { AxiosError } from 'axios';
 import { ErrorResponse } from '../../@types/error.types';
+import { useTranslation } from 'react-i18next';
 
 export const SignUpForm = ({
 	mutate,
@@ -24,6 +25,7 @@ export const SignUpForm = ({
 }: AuthProps) => {
 	const [form] = Form.useForm();
 	const showingOtp = showOTP ? 'hidden' : 'block';
+	const { t } = useTranslation();
 
 	const { minutes, seconds, setMinutes, setSeconds }: TimerState = useTimer({
 		initialSeconds: timeLeft,
@@ -84,13 +86,13 @@ export const SignUpForm = ({
 			{showOTP && (
 				<Form.Item
 					name='otp'
-					label='Verification Code'
+					label={t('auth.sign_up.otp.title')}
 					labelCol={{ span: 24 }}
 					wrapperCol={{ span: 24 }}
 					rules={[
 						{
 							required: true,
-							message: 'Please input your OTP!',
+							message: t('auth.sign_up.otp.error'),
 						},
 					]}
 				>
@@ -101,16 +103,16 @@ export const SignUpForm = ({
 			<Form.Item
 				className={showingOtp}
 				name='name'
-				label='Name'
+				label={t('auth.sign_up.name.title')}
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
 				rules={[
 					{
 						required: true,
-						message: 'Please input your name!',
+						message: t('auth.sign_up.name.error'),
 						whitespace: true,
 					},
-					{ min: 2, message: 'Name must be minimum 2 characters.' },
+					{ min: 2, message: t('auth.sign_up.name.error_length') },
 				]}
 			>
 				<Input
@@ -122,12 +124,12 @@ export const SignUpForm = ({
 			<Form.Item
 				name='email'
 				className={showingOtp}
-				label='Email'
+				label={t('auth.sign_up.email.title')}
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
 				rules={[
-					{ required: true, message: 'Please input your email!' },
-					{ type: 'email' },
+					{ required: true, message: t('auth.sign_up.email.error') },
+					{ type: 'email', message: t('auth.sign_up.email.error') },
 				]}
 			>
 				<Input
@@ -138,19 +140,19 @@ export const SignUpForm = ({
 			</Form.Item>
 			<Form.Item
 				name='password'
-				label='Password'
+				label={t('auth.sign_up.password.title')}
 				className={showingOtp}
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
 				rules={[
 					{
 						required: true,
-						message: 'Please input your password!',
+						message: t('auth.sign_up.password.error'),
 					},
-					{ min: 7, message: 'Password must be minimum 7 characters.' },
+					{ min: 7, message: t('auth.sign_up.password.error_length') },
 					{
 						pattern: new RegExp('([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*'),
-						message: 'Password must be at least one number and letter.',
+						message: t('auth.sign_up.password.error_pattern'),
 					},
 				]}
 				hasFeedback
@@ -160,7 +162,7 @@ export const SignUpForm = ({
 			<Form.Item
 				name='confirm'
 				className={showingOtp}
-				label='Confirm Password'
+				label={t('auth.sign_up.password_confirmation.title')}
 				dependencies={['password']}
 				labelCol={{ span: 24 }}
 				wrapperCol={{ span: 24 }}
@@ -168,7 +170,7 @@ export const SignUpForm = ({
 				rules={[
 					{
 						required: true,
-						message: 'Please confirm your password!',
+						message: t('auth.sign_up.password_confirmation.error'),
 					},
 					({ getFieldValue }) => ({
 						validator(_, value) {
@@ -176,7 +178,7 @@ export const SignUpForm = ({
 								return Promise.resolve();
 							}
 							return Promise.reject(
-								new Error('The new password that you entered do not match!')
+								new Error(t('auth.sign_up.password_confirmation.error_match'))
 							);
 						},
 					}),
@@ -188,27 +190,30 @@ export const SignUpForm = ({
 				<div className='flex justify-between text-base'>
 					{seconds > 0 || minutes > 0 ? (
 						<p>
-							Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+							{t('auth.sign_up.block.title')}: {" "}
+							{minutes < 10 ? `0${minutes}` : minutes}:
 							{seconds < 10 ? `0${seconds}` : seconds}
 						</p>
 					) : (
-						<p>Didn't recieve code?</p>
+						<p>{t('auth.sign_up.no_block')}</p>
 					)}
 					<button
 						onClick={e => handleResend(e)}
 						disabled={seconds > 0 || minutes > 0}
-						className={`font-medium mb-2 w-1/10 ml-auto ${
+						className={`font-medium mb-2 w-2/10 ml-auto ${
 							seconds > 0 || minutes > 0 ? 'text-[#a3a5a7]' : 'text-blue-700'
 						} `}
 					>
-						Resend
+						{t('auth.sign_up.block.button')}
 					</button>
 				</div>
 			)}
 			<Form.Item>
 				<ButtonPrimary
 					isLoading={isLoading}
-					title={showOTP ? 'Complete' : 'Verify Email'}
+					title={
+						showOTP ? t('auth.sign_up.button') : t('auth.sign_up.button_verify')
+					}
 				/>
 			</Form.Item>
 		</Form>

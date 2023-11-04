@@ -15,11 +15,9 @@ export function setUID(value: string) {
 	return Cookies.set('uid', value);
 }
 
-export function setLanguage(title: string, value: string = 'en') {
+export function setLanguage(
+	title: string,
+	value: string = navigator.language || 'en'
+) {
 	return Cookies.set(title, value);
-}
-export function setBlockTime(timeLeft: number = 0) {
-	return Cookies.set('block_time', timeLeft.toString(), {
-		expires: 1 / (24 * timeLeft),
-	});
 }

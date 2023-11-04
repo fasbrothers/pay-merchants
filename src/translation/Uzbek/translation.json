@@ -105,5 +105,66 @@
 		"price_error_for_valid": "Yaroqli raqam boʻlishi kerak",
 		"category_name": "Kategoriyani tanlang",
 		"category_name_error": "Iltimos, kategoriyani tanlang!"
+	},
+	"auth": {
+		"sign_in": {
+			"title": "Tizimga kirish",
+			"account_text": "Sizning profilingiz yo'qmi?",
+			"account_link": "Profil yarating",
+			"email": {
+				"title": "Elektron pochta",
+				"error": "Iltimos, elektron pochtangizni kiriting!"
+			},
+			"password": {
+				"title": "Parol",
+				"error": "Iltimos, parolingizni kiriting!"
+			},
+			"button": "Tizimga kirish",
+			"button_blocked": "Iltimos kuting...",
+			"block": {
+				"title": "Bloklash vaqti"
+			}
+		},
+		"sign_up": {
+			"title": "Ro'yxatdan o'tish",
+			"account_text": "Allaqachon ro'yxatdan o'tganmisiz?",
+			"account_link": "Tizimga kirish",
+			"otp": {
+				"title": "Tasdiq kodi",
+				"error": "Iltimos, tasdiqlash kodingizni kiriting!"
+			},
+			"name": {
+				"title": "Ism",
+				"error": "Iltimos, ismingizni kiriting!",
+				"error_length": "Ism kamida 2 ta belgidan iborat boʻlishi kerak"
+			},
+			"email": {
+				"title": "Elektron pochta",
+				"error": "Iltimos, elektron pochtangizni kiriting!"
+			},
+			"password": {
+				"title": "Parol",
+				"error": "Iltimos, parolingizni kiriting!",
+				"error_length": "Parol kamida 7 ta belgidan iborat bo'lishi kerak",
+				"error_pattern": "Parol kamida bitta raqam va harfdan iborat bo'lishi kerak."
+			},
+			"password_confirmation": {
+				"title": "Parolni tasdiqlash",
+				"error": "Iltimos, parolni tasdiqlashni kiriting!",
+				"error_match": "Siz kiritgan yangi parol mos emas!"
+			},
+			"button": "Toʻliq",
+			"button_verify": "Elektron pochtani tasdiqlang",
+			"block": {
+				"title": "Qolgan vaqt",
+				"button": "Kodni qayta yuborish"
+			},
+			"no_block": "Kodni olmadingizmi?"
+		},
+		"sign_sidebar": {
+			"name": "Azizbek Naimov",
+			"job": "Moliyaviy mutaxassis",
+			"description": "Fintech - bu an'anaviy moliyaviy usullar bilan yakunlashni maqsad qilgan texnologiya va innovatsiya"
+		}
 	}
 }

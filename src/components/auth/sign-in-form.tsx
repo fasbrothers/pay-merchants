@@ -5,9 +5,11 @@ import { ButtonPrimary } from '../shared/button';
 import useTimer, { TimerState } from '../../hooks/useTimer';
 import { useEffect } from 'react';
 import { convertSecondsToMinutes } from '../../utils/convertSecondsToMinutes';
+import { useTranslation } from 'react-i18next';
 
 export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 	const [form] = Form.useForm();
+	const { t } = useTranslation();
 
 	function handleSubmit(values: InputValues) {
 		mutate(values);
@@ -34,12 +36,12 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 			>
 				<Form.Item
 					name='email'
-					label='Email'
+					label={t('auth.sign_in.email.title')}
 					labelCol={{ span: 24 }}
 					wrapperCol={{ span: 24 }}
 					rules={[
-						{ required: true, message: 'Please input your email!' },
-						{ type: 'email' },
+						{ required: true, message: t('auth.sign_in.email.error') },
+						{ type: 'email', message: t('auth.sign_in.email.error') },
 					]}
 				>
 					<Input
@@ -50,13 +52,13 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 				</Form.Item>
 				<Form.Item
 					name='password'
-					label='Password'
+					label={t('auth.sign_in.password.title')}
 					labelCol={{ span: 24 }}
 					wrapperCol={{ span: 24 }}
 					rules={[
 						{
 							required: true,
-							message: 'Please input your password!',
+							message: t('auth.sign_in.password.error'),
 						},
 					]}
 				>
@@ -64,7 +66,8 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 				</Form.Item>
 				{seconds > 0 || minutes > 0 ? (
 					<p className='mb-3 text-base'>
-						Block time : {minutes < 10 ? `0${minutes}` : minutes}:
+						{t('auth.sign_in.block.title')} :{' '}
+						{minutes < 10 ? `0${minutes}` : minutes}:
 						{seconds < 10 ? `0${seconds}` : seconds}
 					</p>
 				) : null}
@@ -72,7 +75,11 @@ export const SignInForm = ({ mutate, isLoading, timeLeft }: AuthProps) => {
 					<ButtonPrimary
 						disabled={seconds > 0 || minutes > 0}
 						isLoading={isLoading}
-						title={seconds > 0 || minutes > 0 ? 'Please wait...' : 'Sign In'}
+						title={
+							seconds > 0 || minutes > 0
+								? t('auth.sign_in.button_blocked')
+								: t('auth.sign_in.button')
+						}
 					/>
 				</Form.Item>
 			</Form>
