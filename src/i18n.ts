@@ -18,7 +18,6 @@ const resources = {
 	},
 };
 
-console.log(navigator.language);
 const defaultLanguage = getFromCookie('language') || navigator.language || 'uz';
 
 i18next.use(initReactI18next).init({

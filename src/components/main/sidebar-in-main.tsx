@@ -19,7 +19,7 @@ export const SidebarInMain = ({
 	setShowNavbar,
 	balance,
 }: SidebarInMainProps) => {
-	const [showBalance, setShowBalance] = useState<boolean>(false);
+	const [showBalance, setShowBalance] = useState<boolean>(true);
 	const { t } = useTranslation();
 	const nav: Navigation[] = t('navigation', {
 		returnObjects: true,
