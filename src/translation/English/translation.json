@@ -15,13 +15,6 @@
 			"name": "services"
 		},
 		{
-			"id": 3,
-			"title": "Cards",
-			"icon": "credit",
-			"url": "/cabinet/cards",
-			"name": "cards"
-		},
-		{
 			"id": 6,
 			"title": "Profile Settings",
 			"icon": "settings",
@@ -90,6 +83,7 @@
 		"title": "Services",
 		"delete_title": "Delete service",
 		"delete_text": "Are you sure you want to delete this service?",
+		"delete_cancel": "Cancel",
 		"edit_title": "Edit service",
 		"add_title": "Add service",
 		"add_button": "Create service",

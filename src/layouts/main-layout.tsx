@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { Suspense, useState, useMemo } from 'react';
+import { Suspense, useState } from 'react';
 import { LoadingLazy } from '../components/shared/loading-lazy';
 import { setLanguage } from '../utils/cookies';
 import { useDataFetching } from '../hooks/useDataFetching';
@@ -10,7 +10,7 @@ export default function MainLayout() {
 	const [showNavbar, setShowNavbar] = useState<boolean>(false);
 	const { pathname } = useLocation();
 
-	const title = useMemo(() => {
+	const title = () => {
 		if (pathname.split('/')[2].length > 0) {
 			return pathname
 				.split('/')[2]
@@ -21,7 +21,7 @@ export default function MainLayout() {
 		} else {
 			return '';
 		}
-	}, [pathname]);
+	};
 
 	const { data: profile, isLoading } = useDataFetching<ProfileResponse>(
 		'profile',
@@ -35,7 +35,7 @@ export default function MainLayout() {
 			<SidebarInMain
 				showNavbar={showNavbar}
 				setShowNavbar={setShowNavbar}
-				title={title}
+				title={title()}
 				balance={profile?.balance || ''}
 			/>
 			<div
@@ -47,7 +47,7 @@ export default function MainLayout() {
 				<HeaderMain
 					setShowNavbar={setShowNavbar}
 					showNavbar={showNavbar}
-					title={title}
+					title={title()}
 				/>
 				<Suspense fallback={<LoadingLazy />}>
 					<div className='grow'>

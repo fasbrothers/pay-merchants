@@ -15,13 +15,6 @@
 			"name": "services"
 		},
 		{
-			"id": 3,
-			"title": "Kartalar",
-			"icon": "credit",
-			"url": "/cabinet/cards",
-			"name": "cards"
-		},
-		{
 			"id": 6,
 			"title": "Profil sozlamalari",
 			"icon": "settings",
@@ -90,6 +83,7 @@
 		"title": "Xizmatlar",
 		"delete_title": "Xizmatni o'chirish",
 		"delete_text": "Haqiqatan ham bu xizmatni oʻchirib tashlamoqchimisiz?",
+		"delete_cancel": "Bekor qilish",
 		"edit_title": "Xizmatni tahrirlash",
 		"add_title": "Xizmat qo'shish",
 		"add_button": "Xizmat yaratish",

@@ -4,6 +4,7 @@ import { toastSuccessMessage } from '../../utils/toast-message';
 import { Button, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { DeleteServiceProps } from '../../@types/service.types';
+import { useTranslation } from 'react-i18next';
 
 export function DeleteService({
 	id,
@@ -16,6 +17,7 @@ export function DeleteService({
 	modalMessage,
 }: DeleteServiceProps) {
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	const { mutate, isLoading } = useMutation({
 		mutationFn: async () => {
@@ -37,7 +39,7 @@ export function DeleteService({
 			onCancel={handleCancel}
 			footer={[
 				<Button key='back' onClick={handleCancel}>
-					Return
+					{t('services.delete_cancel')}
 				</Button>,
 				<Button
 					key='submit'
@@ -47,7 +49,7 @@ export function DeleteService({
 						mutate();
 					}}
 				>
-					Delete
+					{t('services.delete_title')}
 				</Button>,
 			]}
 		>

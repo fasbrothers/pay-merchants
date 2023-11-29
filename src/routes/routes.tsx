@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
 		children: [
 			{
 				index: true,
-				element: <Navigate to='cabinet/services' />,
+				element: <Navigate to='cabinet' />,
 			},
 			{
 				path: 'cabinet',
@@ -29,7 +29,7 @@ const routes: RouteObject[] = [
 				children: [
 					{
 						index: true,
-						element: <Navigate to='cabinet/services' />,
+						element: <Navigate to='services' />,
 					},
 					{
 						children: [

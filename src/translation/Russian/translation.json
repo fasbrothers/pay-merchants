@@ -15,13 +15,6 @@
 			"name": "services"
 		},
 		{
-			"id": 3,
-			"title": "Карты",
-			"icon": "credit",
-			"url": "/cabinet/cards",
-			"name": "cards"
-		},
-		{
 			"id": 6,
 			"title": "Настройки профиля",
 			"icon": "settings",
@@ -90,6 +83,7 @@
 		"title": "Сервисы",
 		"delete_title": "Удалить сервис",
 		"delete_text": "Вы уверены, что хотите удалить эту услугу?",
+		"delete_cancel": "Отмена",
 		"edit_title": "Изменить сервис",
 		"add_title": "Добавить сервис",
 		"add_button": "Создать сервис",
